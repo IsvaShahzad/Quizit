@@ -51,7 +51,7 @@ class CatContainer extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 14,
                     fontFamily: "Oldenburg",
                   ),
                 ),

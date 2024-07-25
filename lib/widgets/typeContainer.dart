@@ -16,14 +16,14 @@ class TypeContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Material(
-        elevation: 5,
+        elevation: 2,
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
         child: Container(
           height: 85,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             color: color,
           ),
           child: Center(
@@ -32,7 +32,7 @@ class TypeContainer extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
-                fontFamily: "Oldenburg",
+                fontFamily: 'Montserrat',
               ),
             ),
           ),

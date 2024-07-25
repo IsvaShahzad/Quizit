@@ -9,6 +9,8 @@ class GetQuestionsService {
     required String catId,
   }) async {
     Map<String, dynamic> data = await Api().get(
+
+      //open trivia database api used
         url:
             "https://opentdb.com/api.php?amount=$questionNumbers&category=$catId&difficulty=$difficulty&type=$type");
     List<Question> questions = [];

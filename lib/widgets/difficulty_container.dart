@@ -17,13 +17,13 @@ class DifficultyContainer extends StatelessWidget {
       onTap: onTap,
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        elevation: 5,
+        borderRadius: BorderRadius.circular(5),
+        elevation: 2,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.26,
           height: 85,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             color: color,
           ),
           child: Center(
@@ -31,8 +31,8 @@ class DifficultyContainer extends StatelessWidget {
               title,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 20,
-                fontFamily: "Oldenburg",
+                fontSize: 19,
+                fontFamily: 'Montserrat',
               ),
             ),
           ),

@@ -80,12 +80,12 @@ class AddPage extends StatelessWidget {
                           "Quiz details",
                           style: TextStyle(
                             color: Colors.black,
-                            fontFamily: "Oldenburg",
-                            fontSize: 20,
+                            fontFamily: "Montserrat",
+                            fontSize: 23,
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
                         Container(
                           width: double.infinity,
@@ -128,7 +128,7 @@ class AddPage extends StatelessWidget {
                           "Brief explanation about quiz",
                           style: TextStyle(
                             color: Colors.black,
-                            fontFamily: "Oldenburg",
+                            fontFamily: "Montserrat",
                             fontSize: 20,
                           ),
                         ),
@@ -169,7 +169,7 @@ class AddPage extends StatelessWidget {
                             margin: const EdgeInsets.only(
                               right: 15,
                               left: 15,
-                              bottom: 15,
+                              bottom: 20,
                               top: 0,
                             ),
                             width: double.infinity,
@@ -192,7 +192,7 @@ class AddPage extends StatelessWidget {
                                   "Let's Play",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontFamily: "Ubuntu",
+                                    fontFamily: "Montserrat",
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white,
                                   ),
@@ -256,9 +256,9 @@ class CustomListTile extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 14,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
             ),

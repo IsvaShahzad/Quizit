@@ -32,26 +32,24 @@ class SignUpTextField extends StatelessWidget {
             obscureText: obscure,
             style: TextStyle(
               fontSize: 20,
-              fontFamily: kFontText,
-              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
             ),
             onChanged: onChange,
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 15, top: 10),
                 hintText: hint,
                 hintStyle: TextStyle(
-                  fontSize: 20,
-                  fontFamily: kFontText,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  fontFamily: 'Montserrat',
                   color: kTextAccent,
                 ),
                 prefixIcon: Icon(
                   icon,
                   color: Colors.black,
-                  size: 30,
+                  size: 22,
                 ),
                 errorStyle: TextStyle(
-                  fontFamily: kFontText,
+                  fontFamily: 'Montserrat',
                   fontSize: 14,
                 ),
                 fillColor: kTextAccent,
@@ -60,34 +58,34 @@ class SignUpTextField extends StatelessWidget {
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: kTextAccent,
-                    width: 3,
+                    width: 1,
                   ),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: kTextAccent,
-                    width: 3,
+                    width: 1,
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: kTextAccent,
-                    width: 3,
+                    width: 2,
                   ),
                 )),
           ),
-          Positioned(
-            right: -17,
-            bottom: -13,
-            child: RotatedBox(
-              quarterTurns: 2,
-              child: Icon(
-                Icons.play_arrow,
-                color: kTextAccent,
-                size: 25,
-              ),
-            ),
-          )
+          // Positioned(
+          //   right: -17,
+          //   bottom: -13,
+          //   child: RotatedBox(
+          //     quarterTurns: 2,
+          //     child: Icon(
+          //       Icons.play_arrow,
+          //       color: kTextAccent,
+          //       size: 25,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

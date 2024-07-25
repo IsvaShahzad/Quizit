@@ -68,7 +68,7 @@ class _CorrectionUi extends State<CorrectionUi> {
           automaticallyImplyLeading: false,
           actions: [
             Container(
-              margin: const EdgeInsets.only(right: 0),
+              margin: const EdgeInsets.only(right: 10),
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -81,8 +81,8 @@ class _CorrectionUi extends State<CorrectionUi> {
                 onTap: questionSelectedIndex == widget.questionsNumber - 1
                     ? null
                     : () {
-                        nextQuestion();
-                      },
+                  nextQuestion();
+                },
                 child: Text(
                   questionSelectedIndex == widget.questionsNumber - 1
                       ? "Done"
@@ -90,7 +90,7 @@ class _CorrectionUi extends State<CorrectionUi> {
                   style: const TextStyle(
                     fontSize: 25,
                     color: Colors.white,
-                    fontFamily: "Oldenburg",
+                    fontFamily: "Montserrat",
                   ),
                 ),
               ),
@@ -107,21 +107,21 @@ class _CorrectionUi extends State<CorrectionUi> {
             onPressed: questionSelectedIndex == 0
                 ? null
                 : () {
-                    setState(
-                      () {
-                        questionSelectedIndex--;
-                      },
-                    );
-                  },
+              setState(
+                    () {
+                  questionSelectedIndex--;
+                },
+              );
+            },
           ),
           backgroundColor: Colors.transparent,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(right: 40, left: 40, top: 65),
+          padding: const EdgeInsets.only(right: 15, left: 20, top: 60),
           child: Column(
             children: [
               Material(
-                elevation: 5,
+                elevation: 3,
                 borderRadius: BorderRadius.circular(23.9),
                 child: Container(
                   width: double.infinity,
@@ -153,11 +153,11 @@ class _CorrectionUi extends State<CorrectionUi> {
                               child: Row(
                                 children: [
                                   for (int i = 0;
-                                      i <
-                                          (widget.questions.length == 10
-                                              ? widget.questions.length / 2
-                                              : widget.questions.length);
-                                      i++)
+                                  i <
+                                      (widget.questions.length == 10
+                                          ? widget.questions.length / 2
+                                          : widget.questions.length);
+                                  i++)
                                     QuestionIndicator(
                                       label: "${i + 1}",
                                       color: questionSelectedIndex == i
@@ -176,8 +176,8 @@ class _CorrectionUi extends State<CorrectionUi> {
                                 child: Row(
                                   children: [
                                     for (int i = 5;
-                                        i < widget.questionsNumber;
-                                        i++)
+                                    i < widget.questionsNumber;
+                                    i++)
                                       QuestionIndicator(
                                         label: "${i + 1}",
                                         color: questionSelectedIndex == i
@@ -210,26 +210,26 @@ class _CorrectionUi extends State<CorrectionUi> {
               ),
               widget.type == "boolean"
                   ? BooleanCorrectionWidget(
-                      wrongAnswers: widget
-                          .questions[questionSelectedIndex].incorrectAnswers,
-                      responseSelectedIndex: -1,
-                      onResponseSelected: (response) {
-                        playerResponse = response;
-                      },
-                    )
+                wrongAnswers: widget
+                    .questions[questionSelectedIndex].incorrectAnswers,
+                responseSelectedIndex: -1,
+                onResponseSelected: (response) {
+                  playerResponse = response;
+                },
+              )
                   : MultipleCorrectionWidget(
-                      wrongAnswers: widget
-                          .questions[questionSelectedIndex].incorrectAnswers,
-                      responseSelectedIndex:
-                          widget.playerSlectedResponses[questionSelectedIndex]
-                              ["playerSelectedResponses"],
-                      answers:
-                          widget.playerSlectedResponses[questionSelectedIndex]
-                              ["answers"],
-                      onResponseSelected: (response) {
-                        playerResponse = response;
-                      },
-                    ),
+                wrongAnswers: widget
+                    .questions[questionSelectedIndex].incorrectAnswers,
+                responseSelectedIndex:
+                widget.playerSlectedResponses[questionSelectedIndex]
+                ["playerSelectedResponses"],
+                answers:
+                widget.playerSlectedResponses[questionSelectedIndex]
+                ["answers"],
+                onResponseSelected: (response) {
+                  playerResponse = response;
+                },
+              ),
               const Spacer(
                 flex: 1,
               ),
@@ -250,7 +250,7 @@ class _CorrectionUi extends State<CorrectionUi> {
                   child: Text(
                     "Back to Results",
                     style: TextStyle(
-                      fontFamily: "Ubuntu",
+                      fontFamily: "Montserrat",
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),

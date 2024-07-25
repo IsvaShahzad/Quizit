@@ -49,7 +49,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
         gradient: LinearGradient(
           colors: [
             kPrimaryColor,
-            const Color(0xff5C3B7E),
+            const Color(0xff006666),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -57,9 +57,9 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF008080),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal:0, vertical: 5),
           child: Column(
             children: [
               AppBar(
@@ -101,7 +101,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
-                          fontFamily: "Oldenburg",
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),
@@ -145,7 +145,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         "Quiz zone",
                         style: TextStyle(
                             fontSize: 20,
-                            fontFamily: "Oldenburg",
+                            fontFamily: 'Montserrat',
                             color: Colors.black),
                       ),
                       const SizedBox(
@@ -157,8 +157,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           DifficultyContainer(
                             title: "Hard",
                             color: difficultySelectedindex == 0
-                                ? const Color(0xffC7A8FC)
-                                : const Color(0xffE3D8F7),
+                                ? const Color(0xff66b2b2)
+                                : const Color(0xffb2d8d8),
                             onTap: () {
                               playSound2();
                               setState(() {
@@ -175,8 +175,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           DifficultyContainer(
                             title: "Medium",
                             color: difficultySelectedindex == 1
-                                ? const Color(0xffC7A8FC)
-                                : const Color(0xffE3D8F7),
+                                ? const Color(0xff66b2b2)
+                                : const Color(0xffb2d8d8),
                             onTap: () {
                               playSound2();
                               setState(() {
@@ -193,8 +193,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           DifficultyContainer(
                             title: "Easy",
                             color: difficultySelectedindex == 2
-                                ? const Color(0xffC7A8FC)
-                                : const Color(0xffE3D8F7),
+                                ? const Color(0xff66b2b2)
+                                : const Color(0xffb2d8d8),
                             onTap: () {
                               playSound2();
                               setState(() {
@@ -217,7 +217,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         "Play Zone",
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: "Oldenburg",
+                          fontFamily: 'Montserrat',
                           color: Colors.black,
                         ),
                       ),
@@ -229,7 +229,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           SizedBox(
                             width: 5,
                           ),
-                          Icon(Icons.quiz_outlined),
+                          Icon(Icons.pending_actions),
                           SizedBox(
                             width: 5,
                           ),
@@ -238,7 +238,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Ubuntu",
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                         ],
@@ -247,10 +247,10 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         height: 15,
                       ),
                       TypeContainer(
-                        title: "True/false",
+                        title: "True/False",
                         color: typeSelectedIndex == 0
-                            ? const Color(0xffC7A8FC)
-                            : const Color(0xffE3D8F7),
+                            ? const Color(0xff66b2b2)
+                            : const Color(0xffb2d8d8),
                         onTap: () {
                           playSound2();
                           setState(() {
@@ -268,10 +268,10 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         height: 13,
                       ),
                       TypeContainer(
-                        title: "Multiple Choise",
+                        title: "Multiple Choice",
                         color: typeSelectedIndex == 1
-                            ? const Color(0xffC7A8FC)
-                            : const Color(0xffE3D8F7),
+                            ? const Color(0xff66b2b2)
+                            : const Color(0xffb2d8d8),
                         onTap: () {
                           playSound2();
                           setState(
@@ -304,13 +304,13 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Ubuntu",
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -330,8 +330,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                               });
                             },
                             color: questionIndex == 0
-                                ? const Color(0xffC7A8FC)
-                                : const Color(0xffE3D8F7),
+                                ? const Color(0xff66b2b2)
+                                : const Color(0xffb2d8d8),
                           ),
                           NumberContainer(
                             title: "10 Questions",
@@ -348,8 +348,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                               });
                             },
                             color: questionIndex == 1
-                                ? const Color(0xffC7A8FC)
-                                : const Color(0xffE3D8F7),
+                                ? const Color(0xff66b2b2)
+                                : const Color(0xffb2d8d8),
                           ),
                         ],
                       ),

@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -15,7 +13,8 @@ import 'package:quiz_app/widgets/Login_textfield.dart';
 
 class LogInPage extends StatelessWidget {
   static String id = "/LoginPage";
-  String? email, password;
+  String? email;
+  final String requiredPassword = "p455w0rd";
   bool isLoading = false;
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -26,7 +25,7 @@ class LogInPage extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          toastSuccess(message: "Welcome to Quizzo!", context: context);
+          toastSuccess(message: "Welcome to Quizit!", context: context);
           isLoading = false;
           Navigator.pushNamed(context, HomePage.id, arguments: email);
         } else if (state is LoginFailure) {
@@ -56,11 +55,11 @@ class LogInPage extends StatelessWidget {
                       child: ListView(
                         shrinkWrap: true,
                         children: [
-                          const Row(
-                            children: [
-                              ArrowButton(),
-                            ],
-                          ),
+                          // const Row(
+                          //   children: [
+                          //     ArrowButton(),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.15,
                           ),
@@ -69,8 +68,7 @@ class LogInPage extends StatelessWidget {
                               "Login",
                               style: TextStyle(
                                 fontSize: 35,
-                                fontFamily: kFontText,
-                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                           ),
@@ -78,6 +76,7 @@ class LogInPage extends StatelessWidget {
                             height: 50,
                           ),
                           CustomTextField(
+
                             icon: Icons.email_outlined,
                             label: "Email Address",
                             onSubmitted: (data) {
@@ -85,33 +84,44 @@ class LogInPage extends StatelessWidget {
                             },
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 40,
                           ),
                           CustomTextField(
-                            icon: Icons.lock_outline,
+                            icon: Icons.lock,
                             label: "Password",
+
                             suffixIcon: true,
                             obscure: true,
                             onSubmitted: (data) {
-                              password = data;
+                              if (data == requiredPassword) {
+                                // Proceed with login
+                                BlocProvider.of<LoginCubit>(context).LoginUser(
+                                    email: email, password: data);
+                              } else {
+                                // Show error toast
+                                toastFailure(
+                                  message: "Incorrect password. Please use correct password",
+                                  context: context,
+                                );
+                              }
                             },
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 60,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: MaterialButton(
-                              elevation: 5,
+                              elevation: 1,
                               height: 50,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(5),
                               ),
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  BlocProvider.of<LoginCubit>(context)
-                                      .LoginUser(
-                                          email: email, password: password);
+                                  // Use required password for login
+                                  BlocProvider.of<LoginCubit>(context).LoginUser(
+                                      email: email, password: requiredPassword);
                                 }
                               },
                               color: kPrimaryColor,
@@ -125,28 +135,27 @@ class LogInPage extends StatelessWidget {
                                     "Log in",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: kFontText,
+                                      fontFamily: 'Montserrat',
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22,
                                     ),
                                   ),
                                   const SizedBox(width: 15),
-                                  const Icon(Icons.arrow_forward,
-                                      color: Colors.white),
+
                                 ],
                               ),
                             ),
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 40,
                           ),
                           Text(
                             "OR",
                             style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: kFontText,
+                              color: Colors.black45,
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                              fontSize: 15,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -163,14 +172,13 @@ class LogInPage extends StatelessWidget {
                                   ));
                             },
                             child: Text(
-                              "Create New Account",
+                              "Create a new account",
                               style: TextStyle(
-                                decoration: TextDecoration.underline,
                                 decorationColor: kTextAccent,
                                 color: kTextAccent,
-                                fontFamily: kFontText,
+                                fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 23,
+                                fontSize: 17,
                               ),
                               textAlign: TextAlign.center,
                             ),

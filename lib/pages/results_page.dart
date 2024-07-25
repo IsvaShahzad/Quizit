@@ -68,7 +68,9 @@ class ResultPage extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/score.png"),
+            image: AssetImage("assets/images/teal.png"),
+            fit: BoxFit.cover, // Ensures the image covers the entire container
+
           ),
         ),
         child: Scaffold(
@@ -104,14 +106,14 @@ class ResultPage extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Material(
-                  elevation: 3,
+                  elevation: 2,
                   borderRadius: BorderRadius.circular(24),
                   color: Colors.transparent,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 25),
+                        vertical: 25, horizontal: 20),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
@@ -121,7 +123,7 @@ class ResultPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Test resulat",
+                          "Results",
                           style: TextStyle(
                             color: const Color(0xff999999).withOpacity(0.6),
                             fontSize: 20,
@@ -158,7 +160,7 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Quiz analyses ",
+                          "Quiz Analysis ",
                           style: TextStyle(
                             color: const Color(0xff999999).withOpacity(0.6),
                             fontSize: 20,
@@ -166,7 +168,7 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(
                           children: [
@@ -191,7 +193,7 @@ class ResultPage extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(
                           children: [
@@ -222,9 +224,9 @@ class ResultPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    right: 47, left: 47, top: 30, bottom: 15),
+                    right: 47, left: 47, top: 20, bottom: 10),
                 child: MaterialButton(
-                  elevation: 5,
+                  elevation: 3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -252,7 +254,7 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      fontFamily: "Ubuntu",
+                      fontFamily: "Montserrat",
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
@@ -278,11 +280,11 @@ class ResultPage extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  "Check your Answers",
+                  "Check Correct Answers",
                   style: TextStyle(
                     fontSize: 16,
-                    fontFamily: "Ubuntu",
-                    fontWeight: FontWeight.w500,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w300,
                     color: kPrimaryColor,
                   ),
                 ),

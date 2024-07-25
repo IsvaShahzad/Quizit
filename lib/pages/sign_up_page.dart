@@ -1,22 +1,18 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/helper/show_toast.dart';
-
 import 'package:quiz_app/pages/cubits/signup_cubit/signup_cubit.dart';
 import 'package:quiz_app/pages/home_page.dart';
 import 'package:quiz_app/widgets/ArrowButton.dart';
 import 'package:quiz_app/widgets/signUptextfield_widget.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class SignUpPage extends StatelessWidget {
   static String id = "/signUpPage";
   String? userName, email, password;
+  final String requiredPassword = "p455w0rd"; // Password to match
   int score = 0;
   bool isLoading = false;
   GlobalKey<FormState> formkey = GlobalKey();
@@ -32,13 +28,10 @@ class SignUpPage extends StatelessWidget {
           Navigator.push(
             context,
             PageTransition(
-              child: ShowCaseWidget(
-                  builder: Builder(
-                builder: (context) => HomePage(
-                  emails: email!,
-                  first: true,
-                ),
-              )),
+              child: HomePage(
+                emails: email!,
+                first: true,
+              ),
               type: PageTransitionType.rightToLeft,
             ),
           );
@@ -65,32 +58,25 @@ class SignUpPage extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                      child: Row(
-                        children: [
-                          ArrowButton(),
-                        ],
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                      // child: Row(
+                      //   children: [
+                      //     ArrowButton(),
+                      //   ],
+                      // ),
                     ),
                     const SizedBox(
-                      height: 120,
+                      height: 75,
                     ),
                     Center(
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
                           fontSize: 35,
-                          fontFamily: kFontText,
+                          fontFamily: 'Montserrat',
                           letterSpacing: 2,
                           fontWeight: FontWeight.w300,
-                          shadows: [
-                            Shadow(
-                              offset: const Offset(2.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ],
+
                         ),
                       ),
                     ),
@@ -120,23 +106,29 @@ class SignUpPage extends StatelessWidget {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 41, vertical: 32),
+                      padding: const EdgeInsets.symmetric(horizontal: 41, vertical: 32),
                       child: MaterialButton(
-                        elevation: 5,
+                        elevation: 2,
                         height: 50,
                         minWidth: 320,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            BlocProvider.of<SignupCubit>(context).signUpUser(
-                              email: email!,
-                              password: password,
-                              userName: userName!,
-                              score: score,
-                            );
+                            if (password == requiredPassword) {
+                              BlocProvider.of<SignupCubit>(context).signUpUser(
+                                email: email!,
+                                password: password!,
+                                userName: userName!,
+                                score: score,
+                              );
+                            } else {
+                              toastFailure(
+                                message: "Password is incorrect. Please try again.",
+                                context: context,
+                              );
+                            }
                           }
                         },
                         color: kPrimaryColor,
@@ -147,16 +139,12 @@ class SignUpPage extends StatelessWidget {
                               "Sign Up",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: kFontText,
+                                fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
                               ),
                             ),
-                            const SizedBox(width: 15),
-                            const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                            ),
+
                           ],
                         ),
                       ),
@@ -166,10 +154,10 @@ class SignUpPage extends StatelessWidget {
                       child: Text(
                         "OR",
                         style: TextStyle(
-                          fontSize: 22,
-                          fontFamily: kFontText,
+                          fontSize: 18,
+                          fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.grey[700],
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -179,14 +167,13 @@ class SignUpPage extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        "Already Have An Account",
+                        "Already have an account? Sign In",
                         style: TextStyle(
-                          decoration: TextDecoration.underline,
                           decorationColor: kTextAccent,
-                          color: kTextAccent,
-                          fontFamily: kFontText,
+                          color: Colors.red,
                           fontWeight: FontWeight.bold,
-                          fontSize: 23,
+                          fontFamily: 'Montserrat',
+                          fontSize: 13,
                         ),
                         textAlign: TextAlign.center,
                       ),

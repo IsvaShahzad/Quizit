@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/data.dart';
 import 'package:quiz_app/helper/show_toast.dart';
-import 'package:quiz_app/pages/cat_settings_page.dart';
+import 'package:quiz_app/pages/question_setting.dart';
 
 class CustomSearchBar extends StatelessWidget {
   CustomSearchBar({

@@ -57,7 +57,7 @@ class OnBoardingWidget extends StatelessWidget {
                   ),
                   const Spacer(flex: 1),
                   MaterialButton(
-                    elevation: 6,
+                    elevation: 2,
                     onPressed: () {
                       controller.nextPage(
                         duration: const Duration(
@@ -81,46 +81,6 @@ class OnBoardingWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(flex: 1),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already Have An Account ? ",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: kFontText,
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              child: LogInPage(),
-                              type: PageTransitionType.fade,
-                              duration: const Duration(milliseconds: 500),
-                              reverseDuration:
-                                  const Duration(milliseconds: 500),
-                            ),
-                          );
-                          ;
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 15,
-                            fontFamily: kFontText,
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    ],
-                  )
                 ],
               ),
             )

@@ -36,88 +36,69 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(3, 4),
-            ),
-          ],
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(3),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.transparent),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "This field is required.";
+            }
+            return null;
+          },
+          obscureText: widget.obscure,
+          onChanged: widget.onSubmitted,
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Montserrat',
           ),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "This field is required.";
-              }
-              return null;
-            },
-            obscureText: widget.obscure,
-            onChanged: widget.onSubmitted,
-            style: TextStyle(
+          decoration: InputDecoration(
+            suffixIcon: widget.suffixIcon
+                ? (widget.obscure
+                ? IconButton(
+              icon: const Icon(
+                Icons.visibility_off,
+                color: Color(0xffDEDEDE),
+              ),
+              onPressed: update,
+            )
+                : IconButton(
+              icon: const Icon(Icons.visibility,
+                  color: Color(0xffDEDEDE)),
+              onPressed: update,
+            ))
+                : null,
+            prefixIcon: Container(
+              margin: const EdgeInsets.only(right: 15),
+              width: 66,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(3),
+                  bottomLeft: Radius.circular(3),
+                ),
+                color: kPrimaryColor,
+              ),
+              child: Icon(
+                widget.icon,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+            hintText: widget.label,
+            hintStyle: TextStyle(
               fontSize: 16,
               fontFamily: kFontText,
+              color: const Color(0xffD9D9D9),
             ),
-            decoration: InputDecoration(
-              suffixIcon: widget.suffixIcon
-                  ? (widget.obscure
-                      ? IconButton(
-                          icon: const Icon(
-                            Icons.visibility_off,
-                            color: Color(0xffDEDEDE),
-                          ),
-                          onPressed: update,
-                        )
-                      : IconButton(
-                          icon: const Icon(Icons.visibility,
-                              color: Color(0xffDEDEDE)),
-                          onPressed: update,
-                        ))
-                  : null,
-              prefixIcon: Container(
-                margin: const EdgeInsets.only(right: 15),
-                width: 66,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                  ),
-                  color: kPrimaryColor,
-                ),
-                child: Icon(
-                  widget.icon,
-                  color: Colors.white,
-                  size: 28,
-                ),
-              ),
-              hintText: widget.label,
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontFamily: kFontText,
-                color: const Color(0xffD9D9D9),
-              ),
-              focusColor: Colors.white,
-              hoverColor: Colors.white,
-              contentPadding: const EdgeInsets.only(top: 10, bottom: 10),
-              isDense: true,
-              errorStyle: TextStyle(
-                fontFamily: kFontText,
-                fontSize: 14,
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(12),
-              ),
+            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 0),
+            isDense: true,
+            errorStyle: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 14,
             ),
+            border: InputBorder.none, // Remove underline
+            enabledBorder: InputBorder.none, // Remove underline
+            focusedBorder: InputBorder.none, // Remove underline
+            disabledBorder: InputBorder.none, // Remove underline
           ),
         ),
       ),

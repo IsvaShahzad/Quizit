@@ -9,7 +9,6 @@ import 'package:quiz_app/pages/onBoarding_page.dart';
 import 'package:quiz_app/pages/sign_up_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quiz_app/pages/splashScreen.dart';
-import 'package:showcaseview/showcaseview.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -41,13 +40,10 @@ class Quiz extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Quiz App",
         routes: {
-          HomePage.id: (context) => ShowCaseWidget(
-                  builder: Builder(
-                builder: (context) => HomePage(
-                  emails: "",
-                  first: false,
-                ),
-              )),
+          HomePage.id: (context) => HomePage(
+            emails: "",
+            first: false,
+          ),
           OnBoardingPage.id: (context) => OnBoardingPage(),
           GetStartedPage.id: (context) => const GetStartedPage(),
           LogInPage.id: (context) => LogInPage(),

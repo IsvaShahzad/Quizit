@@ -37,7 +37,7 @@ class _QuestionPageState extends State<QuestionPage> {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/Question_background.png"),
+            image: AssetImage("assets/images/teal.png"),
           ),
         ),
         child: FutureBuilder(
@@ -49,7 +49,7 @@ class _QuestionPageState extends State<QuestionPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const LoadingWidget(
-                color: Colors.deepPurple,
+                color: Color(0xFF6666),
               );
             } else if (snapshot.hasData) {
               questions = snapshot.data!;
@@ -66,7 +66,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       questionNumber: widget.questionNumber,
                     )
                   : Scaffold(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Color(0xFF8080),
                       body: Container(
                         height: 200,
                         width: double.infinity,
@@ -92,7 +92,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               "There is no data for this type of questions",
                               style: TextStyle(
                                 fontSize: 20,
-                                fontFamily: kFontText,
+                                fontFamily: 'Montserrat',
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -123,7 +123,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                     "Change settings",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      fontFamily: "Ubuntu",
+                                      fontFamily: 'Montserrat',
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,
                                     ),

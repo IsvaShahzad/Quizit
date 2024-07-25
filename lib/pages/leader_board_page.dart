@@ -32,140 +32,145 @@ class LeaderBoardPage extends StatelessWidget {
           for (int i = 0; i < docIds.length; i++) {
             users.add(User.fromjson(docIds[i].data()));
           }
-          return PopScope(
-            canPop: false,
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                leading: Row(
-                  children: [
-                    const SizedBox(
-                      width: 5,
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              leading: Row(
+                children: [
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, HomePage.id,
+                          arguments: email);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
                     ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, HomePage.id,
-                            arguments: email);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              backgroundColor: kPrimaryColor,
-              body: Padding(
-                padding: const EdgeInsets.only(top: 0, bottom: 0),
-                child: Column(
-                  children: [
-                    Padding(
+            ),
+            backgroundColor: kPrimaryColor,
+            body: Padding(
+              padding: const EdgeInsets.only(top: 0, bottom: 0),
+              child: Column(
+                children: [
+                  Flexible(
+                    child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          LeaderBoardContainer(
-                            color: const Color(0xFFC0C0C0),
-                            size: 12,
-                            rank: 2,
-                            score: users[1].score,
-                            image: "assets/icons/knight.png",
-                            name: users[1].userName,
-                            bottom: 20,
-                            width: 50,
-                            height: 50,
+                          Expanded(
+                            child: LeaderBoardContainer(
+                              color: const Color(0xFFC0C0C0),
+                              size: 12,
+                              rank: 2,
+                              score: users[1].score,
+                              image: "assets/icons/knight.png",
+                              name: users[1].userName,
+                              bottom: 20,
+                              width: 50,
+                              height: 50,
+                            ),
                           ),
-                          LeaderBoardContainer(
-                            color: const Color(0xFFFFD700),
-                            size: 14,
-                            rank: 1,
-                            score: users[0].score,
-                            width: 70,
-                            height: 70,
-                            bottom: 50,
-                            image: "assets/icons/king.png",
-                            name: users[0].userName,
+                          Expanded(
+                            child: LeaderBoardContainer(
+                              color: const Color(0xFFFFD700),
+                              size: 14,
+                              rank: 1,
+                              score: users[0].score,
+                              width: 70,
+                              height: 70,
+                              bottom: 50,
+                              image: "assets/icons/kingavatar.png",
+                              name: users[0].userName,
+                            ),
                           ),
-                          LeaderBoardContainer(
-                            color: const Color(0xFFCD7F32),
-                            size: 12,
-                            width: 50,
-                            height: 50,
-                            rank: 3,
-                            score: users[2].score,
-                            bottom: 20,
-                            image: "assets/icons/jester.png",
-                            name: users[2].userName,
+                          Expanded(
+                            child: LeaderBoardContainer(
+                              color: const Color(0xFFCD7F32),
+                              size: 12,
+                              width: 50,
+                              height: 50,
+                              rank: 3,
+                              score: users[2].score,
+                              bottom: 20,
+                              image: "assets/icons/jester.png",
+                              name: users[2].userName,
+                            ),
                           )
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 3,
-                          vertical: 20,
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 3,
+                        vertical: 20,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40),
                         ),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
+                      ),
+                      child: ListView.builder(
+                        itemCount: users.length - 3,
+                        itemBuilder: (context, index) => ListTile(
+                          trailing: Container(
+                            width: 60,
+                            height: 26,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color(0xffAD8AE8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "${users[index + 3].score}",
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: "Montserrat",
+                                    color: Color(0xff2B262D)),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: ListView.builder(
-                          itemCount: users.length - 3,
-                          itemBuilder: (context, index) => ListTile(
-                            trailing: Container(
-                              width: 60,
-                              height: 26,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xffAD8AE8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${users[index + 3].score}",
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "DM Sans",
-                                      color: Color(0xff2B262D)),
-                                ),
+                          leading: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffAD8AE8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "${index + 4}",
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: "Montserrat",
+                                    color: Color(0xff2B262D)),
                               ),
                             ),
-                            leading: Container(
-                              width: 32,
-                              height: 32,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffAD8AE8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${index + 4}",
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: "Oldenburg",
-                                      color: Color(0xff2B262D)),
-                                ),
-                              ),
-                            ),
-                            title: Text(
-                              users[index + 3].userName,
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: "Oldenburg",
-                                  color: Color(0xff2B262D)),
-                            ),
+                          ),
+                          title: Text(
+                            users[index + 3].userName,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontFamily: "Oldenburg",
+                                color: Color(0xff2B262D)),
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           );

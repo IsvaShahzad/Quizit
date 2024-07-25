@@ -47,16 +47,9 @@ class GetStartedPage extends StatelessWidget {
                     Text(
                       "LogIn Or Sign up",
                       style: TextStyle(
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(0, 2), // Offset of the shadow
-                            color: Colors.black.withOpacity(
-                                0.5), // Color of the shadow with some opacity
-                            blurRadius: 4, // Amount of blur for the shadow
-                          ),
-                        ],
+
                         fontSize: 20,
-                        fontFamily: kFontText,
+                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -64,7 +57,7 @@ class GetStartedPage extends StatelessWidget {
                       flex: 2,
                     ),
                     MaterialButton(
-                      elevation: 6,
+                      elevation: 2,
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -77,7 +70,7 @@ class GetStartedPage extends StatelessWidget {
                         );
                       },
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       color: kPrimaryColor,
                       minWidth: MediaQuery.of(context).size.width * 0.78,
@@ -86,9 +79,9 @@ class GetStartedPage extends StatelessWidget {
                         "Log in",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 21,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          fontFamily: kFontText,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),
@@ -96,7 +89,7 @@ class GetStartedPage extends StatelessWidget {
                       flex: 1,
                     ),
                     MaterialButton(
-                      elevation: 6,
+                      elevation: 2,
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -109,7 +102,7 @@ class GetStartedPage extends StatelessWidget {
                         );
                       },
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       color: const Color(0xFFDEDEDE),
                       minWidth: MediaQuery.of(context).size.width * 0.78,
@@ -118,9 +111,9 @@ class GetStartedPage extends StatelessWidget {
                         "Create an Account",
                         style: TextStyle(
                           color: const Color(0xFF6808C7),
-                          fontSize: 21,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          fontFamily: kFontText,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),

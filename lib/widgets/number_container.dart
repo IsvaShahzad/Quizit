@@ -16,14 +16,14 @@ class NumberContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Material(
-        elevation: 5,
+        elevation: 3,
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.41,
           height: 85,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             color: color,
           ),
           child: Center(
@@ -32,7 +32,7 @@ class NumberContainer extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 15,
-                fontFamily: "Oldenburg",
+                fontFamily: 'Montserrat',
               ),
             ),
           ),
