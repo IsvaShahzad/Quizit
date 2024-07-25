@@ -16,18 +16,18 @@ class ResponseContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(8),
         color: Colors.transparent,
         elevation: 3,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: const Color(0xffC7A8FC),
+            borderRadius: BorderRadius.circular(8),
+            color: const Color(0xff008080),
             border: Border.all(
               color: color,
-              width: 2,
+              width: 3,
             ),
           ),
           child: Row(
@@ -60,7 +60,7 @@ class ResponseContainer extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
-                    fontFamily: "Poppins",
+                    fontFamily: "Montserrat",
                     fontWeight: FontWeight.w500,
                   ),
                 ),

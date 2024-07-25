@@ -11,8 +11,8 @@ class SecoundProfileTab extends StatelessWidget {
   final Map<String, dynamic> data;
   final LinearGradient gradient = const LinearGradient(
     colors: [
-      Color(0xff8251DE),
-      Color(0xff462C78),
+      Color(0xFF008080),
+      Color(0xFF006666),
     ],
   );
   final CategoriesData catdata = CategoriesData();

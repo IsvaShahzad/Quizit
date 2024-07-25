@@ -14,8 +14,9 @@ class IntroPage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return OnBoardingWidget(
         controller: controller,
-        image: "assets/images/onBoarding2.png",
+        image: "assets/images/intro2.png",
         description:
-            "Participate in educational quizzes designed to infuse enjoyment and enthusiasm into the learning process.");
+            "Engage in educational quizzes crafted to bring fun and excitement to learning."
+    );
   }
 }

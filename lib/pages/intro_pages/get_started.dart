@@ -15,7 +15,7 @@ class GetStartedPage extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage("assets/images/onboarding_background.png"),
+            image: AssetImage("assets/images/Quizzit.png"),
           ),
         ),
         child: Padding(
@@ -26,7 +26,6 @@ class GetStartedPage extends StatelessWidget {
               const Spacer(
                 flex: 11,
               ),
-              Image.asset(kLogo),
               const Spacer(
                 flex: 1,
               ),
@@ -79,7 +78,7 @@ class GetStartedPage extends StatelessWidget {
                         "Log in",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                         ),
@@ -110,8 +109,8 @@ class GetStartedPage extends StatelessWidget {
                       child: Text(
                         "Create an Account",
                         style: TextStyle(
-                          color: const Color(0xFF6808C7),
-                          fontSize: 20,
+                          color: const Color(0xFF006666),
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                         ),

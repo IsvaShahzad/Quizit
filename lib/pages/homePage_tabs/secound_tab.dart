@@ -46,7 +46,7 @@ class _SecoundTabState extends State<SecoundTab> {
           },
           child: CatContainer(
             image: data.entertainmentList[index]["image"],
-            color: selectedIndex == index ? Colors.purple : Colors.grey,
+            color: selectedIndex == index ? Colors.teal : Colors.grey,
             title: data.entertainmentList[index]["name"],
             questionsNumber:
                 data.entertainmentList[index]["total_questions"].toString(),

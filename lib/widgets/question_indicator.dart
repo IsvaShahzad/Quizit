@@ -38,7 +38,7 @@ class QuestionIndicator extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16,
               color: Colors.white,
-              fontFamily: "Ubuntu",
+              fontFamily: "Montserrat",
               fontWeight: FontWeight.w500,
             ),
           ),

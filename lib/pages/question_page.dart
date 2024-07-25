@@ -38,6 +38,8 @@ class _QuestionPageState extends State<QuestionPage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/teal.png"),
+            fit: BoxFit.cover, // Ensures the image covers the entire container
+
           ),
         ),
         child: FutureBuilder(

@@ -64,7 +64,7 @@ class _SplashSreenState extends State<SplashSreen> {
           opacity: _isVisible ? 1.0 : 0.0, // Set opacity based on visibility
           child: Image.asset(
             "assets/images/logo 1.png",
-            width: 146,
+            width: 145,
             height: 170,
           ),
         ),

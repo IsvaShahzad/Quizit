@@ -35,8 +35,9 @@ class Quiz extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          primarySwatch: Colors.teal,
         ),
+
         debugShowCheckedModeBanner: false,
         title: "Quiz App",
         routes: {

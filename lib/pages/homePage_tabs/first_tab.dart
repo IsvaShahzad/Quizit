@@ -48,7 +48,7 @@ class _FirstTabState extends State<FirstTab> {
           child: CatContainer(
             image: data.otherList[index]["image"],
             title: data.otherList[index]["name"],
-            color: selectedIndex == index ? Colors.purple : Colors.grey,
+            color: selectedIndex == index ? Colors.teal : Colors.grey,
             questionsNumber:
                 data.otherList[index]["total_questions"].toString(),
           ),

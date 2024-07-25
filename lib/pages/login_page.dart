@@ -44,7 +44,7 @@ class LogInPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.asset(
-                      "assets/images/login_background.png",
+                      "assets/images/bg1.png",
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       fit: BoxFit.cover,

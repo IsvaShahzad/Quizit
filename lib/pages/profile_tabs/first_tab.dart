@@ -16,8 +16,8 @@ class FirstProfileTab extends StatelessWidget {
   final List<Map<String, dynamic>> weakestCat = [];
   final LinearGradient gradient = const LinearGradient(
     colors: [
-      Color(0xff8251DE),
-      Color(0xff462C78),
+      Color(0xFF008080),
+      Color(0xFF006666),
     ],
   );
   bool exist = false;
@@ -205,7 +205,7 @@ class FirstProfileTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "WEAKEST THEMES",
+                      "PERFORMANCE ",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

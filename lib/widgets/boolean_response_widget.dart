@@ -42,7 +42,7 @@ class _BooleanResponseWidgetState extends State<BooleanResponseWidget> {
           child: ResponseWidgetV2(
             title: "True",
             color: widget.responseSelectedIndex == 0
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),
@@ -65,7 +65,7 @@ class _BooleanResponseWidgetState extends State<BooleanResponseWidget> {
           child: ResponseWidgetV2(
             title: "False",
             color: widget.responseSelectedIndex == 1
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),
@@ -89,14 +89,14 @@ class ResponseWidgetV2 extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
         borderRadius: BorderRadius.circular(14),
-        color: const Color(0xffC7A8FC),
-        elevation: 3,
+        color: const Color(0xFF008080),
+        elevation: 2,
         child: Container(
           height: 55,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: const Color(0xffC7A8FC),
+            borderRadius: BorderRadius.circular(8),
+            color: const Color(0xFF008080),
             border: Border.all(color: color, width: 2),
           ),
           child: Center(
@@ -105,7 +105,7 @@ class ResponseWidgetV2 extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: kFontText,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),

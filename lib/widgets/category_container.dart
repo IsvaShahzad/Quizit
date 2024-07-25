@@ -12,8 +12,8 @@ class CatContainer extends StatelessWidget {
   final Color color;
   final gradient = const LinearGradient(
     colors: [
-      Color(0xff8251DE),
-      Color(0xff462C78),
+      Color(0xff008080),
+      Color(0xff006666),
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -52,7 +52,7 @@ class CatContainer extends StatelessWidget {
                   title,
                   style: const TextStyle(
                     fontSize: 14,
-                    fontFamily: "Oldenburg",
+                    fontFamily: "Montserrat",
                   ),
                 ),
               ),
@@ -67,7 +67,7 @@ class CatContainer extends StatelessWidget {
                     style: const TextStyle(
                       color: Color(0xff999999),
                       fontSize: 15,
-                      fontFamily: "Oldenburg",
+                      fontFamily: "Montserrat",
                     ),
                   ),
                 ],

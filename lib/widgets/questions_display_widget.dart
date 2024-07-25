@@ -136,9 +136,9 @@ class _QuestionUiState extends State<QuestionUi> {
                     ? "Done"
                     : "Next",
                 style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 22,
                   color: Colors.white,
-                  fontFamily: "Oldenburg",
+                  fontFamily: "Montserrat",
                 ),
               ),
             ),
@@ -156,7 +156,7 @@ class _QuestionUiState extends State<QuestionUi> {
             children: [
               Material(
                 elevation: 3,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(15),
                 child: Container(
                   width: double.infinity,
                   height: widget.questionsNumber == 10 ? 250.16 : 215,
@@ -221,7 +221,7 @@ class _QuestionUiState extends State<QuestionUi> {
                                     QuestionIndicator(
                                       label: "${i + 1}",
                                       color: questionSelectedIndex == i
-                                          ? const Color(0xffA76AE4)
+                                          ? const Color(0xFF008080)
                                           : const Color(0xffE5E5E5),
                                     ),
                                 ],
@@ -343,7 +343,7 @@ class _QuestionUiState extends State<QuestionUi> {
                   "Exit",
                   style: TextStyle(
                     fontSize: 16,
-                    fontFamily: "Ubuntu",
+                    fontFamily: "Montserrat",
                     fontWeight: FontWeight.w500,
                     color: kPrimaryColor,
                   ),

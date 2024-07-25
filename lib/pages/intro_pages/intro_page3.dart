@@ -16,7 +16,7 @@ class IntroPage3 extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage("assets/images/onboarding_background.png"),
+          image: AssetImage("assets/images/intro3.png"),
         ),
       ),
       child: Padding(
@@ -27,7 +27,7 @@ class IntroPage3 extends StatelessWidget {
             const Spacer(
               flex: 4,
             ),
-            Image.asset("assets/images/onBoarding3.png"),
+            // Image.asset("assets/images/onBoarding3.png"),
             const Spacer(
               flex: 1,
             ),
@@ -42,7 +42,7 @@ class IntroPage3 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Prove your expertise and become a quiz master by answering thought-provoking questions subjects. ",
+                    "Demonstrate your expertise and excel as a quiz master by answering challenging questions across different subjects.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
@@ -51,7 +51,7 @@ class IntroPage3 extends StatelessWidget {
                   ),
                   const Spacer(flex: 2),
                   MaterialButton(
-                    elevation: 6,
+                    elevation: 3,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -62,7 +62,7 @@ class IntroPage3 extends StatelessWidget {
                       );
                     },
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(5),
                     ),
                     color: kPrimaryColor,
                     minWidth: MediaQuery.of(context).size.width * 0.78,

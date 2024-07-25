@@ -51,7 +51,7 @@ class _MultipleResponseWidgetState extends State<MultipleResponseWidget> {
                 .replaceAll("&rsquo;", "'"),
             order: "A",
             color: widget.responseSelectedIndex == 0
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),
@@ -82,7 +82,7 @@ class _MultipleResponseWidgetState extends State<MultipleResponseWidget> {
                 .replaceAll("&rsquo;", "'"),
             order: "B",
             color: widget.responseSelectedIndex == 1
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),
@@ -113,7 +113,7 @@ class _MultipleResponseWidgetState extends State<MultipleResponseWidget> {
                 .replaceAll("&rsquo;", "'"),
             order: "C",
             color: widget.responseSelectedIndex == 2
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),
@@ -144,7 +144,7 @@ class _MultipleResponseWidgetState extends State<MultipleResponseWidget> {
                 .replaceAll("&rsquo;", "'"),
             order: "D",
             color: widget.responseSelectedIndex == 3
-                ? const Color(0xff6808C7)
+                ? const Color(0xffb2d8d8)
                 : Colors.transparent,
           ),
         ),

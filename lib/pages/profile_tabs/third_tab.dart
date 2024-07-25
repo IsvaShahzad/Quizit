@@ -1,67 +1,69 @@
-// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/widgets/label_widger.dart';
 
-class ThirdProfileTab extends StatelessWidget {
+class ThirdProfileTab extends StatefulWidget {
   ThirdProfileTab({
     super.key,
     required this.data,
   });
+
   final Map<String, dynamic> data;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordContreoller = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey();
+
+  @override
+  _ThirdProfileTabState createState() => _ThirdProfileTabState();
+}
+
+class _ThirdProfileTabState extends State<ThirdProfileTab> {
+  late TextEditingController usernameController;
+  late TextEditingController passwordController;
+  late TextEditingController emailController;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    usernameController = TextEditingController(text: widget.data["username"] ?? '');
+    passwordController = TextEditingController(text: widget.data["password"] ?? '');
+    emailController = TextEditingController(text: widget.data["email"] ?? '');
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    usernameController.text = data["username"];
-    passwordContreoller.text = data["password"];
-    emailController.text = data["email"];
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 39),
       child: Form(
         key: formKey,
         child: ListView(
           children: [
-            const Label(
-              text: "Username",
-            ),
-            const SizedBox(
-              height: 2,
-            ),
-            ProfileTextField(usernameController: usernameController),
-            const SizedBox(
-              height: 20,
-            ),
-            const Label(
-              text: "email",
-            ),
-            const SizedBox(
-              height: 2,
-            ),
+            const Label(text: "Username"),
+            const SizedBox(height: 2),
+            ProfileTextField(controller: usernameController),
+            const SizedBox(height: 20),
+            const Label(text: "Email"),
+            const SizedBox(height: 2),
             ProfileTextField(
-              usernameController: emailController,
-              enabled: false,
+              controller: emailController,
+              enabled: true,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Label(
-              text: "Password",
-            ),
-            const SizedBox(
-              height: 2,
-            ),
+            const SizedBox(height: 20),
+            const Label(text: "Password"),
+            const SizedBox(height: 2),
             ProfileTextField(
-              usernameController: passwordContreoller,
+              controller: passwordController,
               obscure: true,
-              enabled: false,
+              enabled: true,
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -69,16 +71,18 @@ class ThirdProfileTab extends StatelessWidget {
                   BoxShadow(
                     color: Colors.white.withOpacity(0.3),
                     spreadRadius: 0,
-                    blurRadius: 16,
-                    offset: const Offset(5, 4), // changes position of shadow
+                    blurRadius: 15,
+                    offset: const Offset(5, 4),
                   ),
                 ],
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _updateProfile(context);
+                },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: const Color(0xff603D83), // Text color
-                  elevation: 0, // No elevation for the button itself
+                  foregroundColor: const Color(0xff006666),
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -86,10 +90,10 @@ class ThirdProfileTab extends StatelessWidget {
                 child: const Text(
                   "Update",
                   style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: "Ubuntu",
+                    fontSize: 16,
+                    fontFamily: "Montserrat",
                     fontWeight: FontWeight.bold,
-                    color: Color(0xff603D83),
+                    color: Color(0xff006666),
                   ),
                 ),
               ),
@@ -99,31 +103,59 @@ class ThirdProfileTab extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> _updateProfile(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      // Collect updated data
+      final updatedUsername = usernameController.text;
+      final updatedPassword = passwordController.text;
+      final updatedEmail = emailController.text;
+
+      try {
+        // Save data to SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('username', updatedUsername);
+        await prefs.setString('password', updatedPassword);
+        await prefs.setString('email', updatedEmail);
+
+        // Show a success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully!')),
+        );
+      } catch (e) {
+        // Handle any errors
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to update profile: $e')),
+        );
+      }
+    }
+  }
 }
 
 class ProfileTextField extends StatelessWidget {
   const ProfileTextField({
     super.key,
-    required this.usernameController,
+    required this.controller,
     this.obscure = false,
     this.enabled = true,
   });
 
-  final TextEditingController usernameController;
-  final bool obscure, enabled;
+  final TextEditingController controller;
+  final bool obscure;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: Colors.teal,
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value == null || value.isEmpty) {
           return "Field is required.";
-        } else {
-          return "";
         }
+        return null;
       },
       enabled: enabled,
-      controller: usernameController,
+      controller: controller,
       obscureText: obscure,
       style: TextStyle(
         fontFamily: kFontText,
@@ -131,8 +163,7 @@ class ProfileTextField extends StatelessWidget {
         color: Colors.white,
       ),
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         suffixIcon: const Icon(
           Icons.edit,
           color: Colors.white,
@@ -151,7 +182,6 @@ class ProfileTextField extends StatelessWidget {
             width: 1,
           ),
         ),
-        focusColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(9),
           borderSide: const BorderSide(

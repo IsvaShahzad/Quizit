@@ -46,7 +46,7 @@ class SignUpPage extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/register_background.png"),
+                image: AssetImage("assets/images/bg1.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -76,6 +76,7 @@ class SignUpPage extends StatelessWidget {
                           fontFamily: 'Montserrat',
                           letterSpacing: 2,
                           fontWeight: FontWeight.w300,
+                          color: Colors.white
 
                         ),
                       ),
@@ -98,6 +99,7 @@ class SignUpPage extends StatelessWidget {
                       },
                     ),
                     SignUpTextField(
+
                       hint: "Password",
                       icon: Icons.lock,
                       obscure: true,

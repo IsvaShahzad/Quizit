@@ -48,7 +48,7 @@ class _ThirdTabState extends State<ThirdTab> {
           },
           child: CatContainer(
             image: data.scienceList[index]["image"],
-            color: selectedIndex == index ? Colors.purple : Colors.grey,
+            color: selectedIndex == index ? Colors.teal : Colors.grey,
             title: data.scienceList[index]["name"],
             questionsNumber:
                 data.scienceList[index]["total_questions"].toString(),

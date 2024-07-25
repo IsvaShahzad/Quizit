@@ -73,7 +73,7 @@ class CustomSearchBar extends StatelessWidget {
           contentPadding: const EdgeInsets.all(5),
           prefixIcon: const Icon(
             Icons.search,
-            color: Color(0xff643EAB),
+            color: Color(0xff006666),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(35),

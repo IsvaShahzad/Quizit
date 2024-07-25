@@ -25,7 +25,7 @@ class AddPage extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 kPrimaryColor,
-                const Color(0xff5C3B7E),
+                const Color(0xFF006666),
               ],
             ),
           ),
@@ -70,7 +70,7 @@ class AddPage extends StatelessWidget {
                               gradient: LinearGradient(
                                 colors: [
                                   kPrimaryColor,
-                                  const Color(0xff5C3B7E),
+                                  const Color(0xFF006666),
                                 ],
                               ),
                             ),
@@ -95,12 +95,14 @@ class AddPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            padding: EdgeInsets.symmetric(horizontal: 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 CustomDetailedContainer(
                                   icon: Icons.article_outlined,
+
+
                                 ),
                                 CustomDetailedText(
                                   text: "1 Question",
@@ -178,8 +180,8 @@ class AddPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                               gradient: const LinearGradient(
                                 colors: [
-                                  Color(0xff8251DE),
-                                  Color(0xff462C78),
+                                  Color(0xff008080),
+                                  Color(0xFF006666),
                                 ],
                               ),
                             ),
@@ -282,7 +284,7 @@ class CustomDetailedText extends StatelessWidget {
       text,
       style: const TextStyle(
         fontSize: 13.5,
-        fontFamily: "Ubuntu",
+        fontFamily: "Montserrat",
         fontWeight: FontWeight.w500,
         color: Colors.black,
       ),
@@ -306,8 +308,8 @@ class CustomDetailedContainer extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xff8251DE),
-            Color(0xff462C78),
+            Color(0xff008080),
+            Color(0xff006666),
           ],
         ),
       ),

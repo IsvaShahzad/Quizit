@@ -85,14 +85,14 @@ class ResponseWidgetV2 extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
         borderRadius: BorderRadius.circular(14),
-        color: const Color(0xffC7A8FC),
+        color: const Color(0xff008080),
         elevation: 3,
         child: Container(
           height: 55,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            color: const Color(0xffC7A8FC),
+            color: const Color(0xff008080),
             border: Border.all(color: color, width: 2),
           ),
           child: Center(

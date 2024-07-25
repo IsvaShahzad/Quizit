@@ -17,7 +17,7 @@ class ScoreWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 4.7,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xffC7A8FC).withOpacity(0.3),
+            color: const Color(0xFF006666).withOpacity(0.3),
           ),
         ),
         Positioned(
@@ -28,7 +28,7 @@ class ScoreWidget extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xffC7A8FC),
+              color: Color(0xFF66b2b2),
             ),
           ),
         ),
@@ -52,7 +52,7 @@ class ScoreWidget extends StatelessWidget {
                         fontSize: 18,
                         fontFamily: kFontText,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xffA76AE4)),
+                        color: const Color(0xFF006666)),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,10 +60,10 @@ class ScoreWidget extends StatelessWidget {
                       Text(
                         "$score ",
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           fontFamily: kFontText,
-                          color: const Color(0xff9D57E3),
+                          color: const Color(0xFF006666),
                         ),
                       ),
                       Text(
@@ -72,7 +72,7 @@ class ScoreWidget extends StatelessWidget {
                           fontSize: 18,
                           fontFamily: kFontText,
                           fontWeight: FontWeight.w500,
-                          color: const Color(0xffA76AE4),
+                          color: const Color(0xFF006666),
                         ),
                       ),
                     ],

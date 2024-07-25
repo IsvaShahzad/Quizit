@@ -101,9 +101,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               const SizedBox(height: 45),
               DrawerListTile(
-                onTap: () {},
+                onTap: () {
+
+                },
                 icon: Icons.home,
                 title: "Home",
+
+
               ),
               const SizedBox(height: 15),
               DrawerListTile(
@@ -275,10 +279,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           dividerColor: Colors.transparent,
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           labelStyle: TextStyle(fontFamily: "Nunito", fontSize: 15),
+                          indicator: UnderlineTabIndicator(
+                            borderSide: BorderSide(color: Colors.teal, width: 3),
+                          ),
+                          labelColor: Colors.teal, // Set the text color for the selected tab
+                          unselectedLabelColor: Colors.grey, // Optional: Set the text color for unselected tabs
                           tabs: [
                             Tab(text: "Popular"),
                             Tab(text: "Entertainment"),
-                            Tab(text: "Science"),
+                            Tab(text: "Education"),
                           ],
                         ),
                         Expanded(

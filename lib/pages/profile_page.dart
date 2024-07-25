@@ -26,8 +26,8 @@ class ProfilePage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xffA76AE4),
-              Color(0xff5C3B7E),
+              Color(0xff008080),
+              Color(0xff006666),
             ],
           ),
         ),
@@ -73,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
-                      fontFamily: kFontText,
+                      fontFamily: 'Montserrat',
                       color: Colors.white,
                     ),
                   ),

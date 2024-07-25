@@ -125,45 +125,57 @@ class LeaderBoardPage extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: users.length - 3,
                         itemBuilder: (context, index) => ListTile(
-                          trailing: Container(
-                            width: 60,
-                            height: 26,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: const Color(0xffAD8AE8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "${users[index + 3].score}",
-                                style: const TextStyle(
+                          trailing: Material(
+                            elevation: 3, // Adjust the elevation as needed
+                            borderRadius: BorderRadius.circular(20), // Matches the container's borderRadius
+                            color: Colors.transparent, // Needed to make the shadow visible
+                            child: Container(
+                              width: 60,
+                              height: 26,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color(0xff66b2b2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${users[index + 3].score}",
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     fontFamily: "Montserrat",
-                                    color: Color(0xff2B262D)),
+                                    color: Color(0xff2B262D),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                          leading: Container(
-                            width: 32,
-                            height: 32,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color(0xffAD8AE8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "${index + 4}",
-                                style: const TextStyle(
-                                    fontSize: 20,
+                          leading: Material(
+                            elevation: 3, // Adjust the elevation as needed
+                            shape: const CircleBorder(),
+                            color: Colors.transparent, // Needed to make the shadow visible
+                            child: Container(
+                              width: 32,
+                              height: 32,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff66b2b2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${index + 4}",
+                                  style: const TextStyle(
+                                    fontSize: 17,
                                     fontFamily: "Montserrat",
-                                    color: Color(0xff2B262D)),
+                                    color: Color(0xff2B262D),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                           title: Text(
                             users[index + 3].userName,
                             style: const TextStyle(
-                                fontSize: 20,
-                                fontFamily: "Oldenburg",
+                                fontSize: 18,
+                                fontFamily: "Monserrat",
                                 color: Color(0xff2B262D)),
                           ),
                         ),
@@ -213,55 +225,67 @@ class LeaderBoardContainer extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 10, top: 5),
-          padding: const EdgeInsetsDirectional.all(10),
-          decoration: BoxDecoration(
-            color: const Color(0xffE4D9F8),
-            shape: BoxShape.circle,
-            border: Border.all(color: color, width: 3),
-          ),
-          child: Image.asset(
-            image,
-            width: 70,
-            height: 70,
-          ),
-        ),
-        Container(
-          width: 70,
-          padding: EdgeInsets.only(bottom: bottom),
-          decoration: const BoxDecoration(
-            color: Color(0xffAD8AE8),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+        Material(
+          elevation: 3, // Adjust the elevation to get the desired shadow
+          shape: const CircleBorder(),
+          color: Colors.transparent, // Makes sure the shadow is visible
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10, top: 5),
+            padding: const EdgeInsetsDirectional.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xffE4D9F8),
+              shape: BoxShape.circle,
+              border: Border.all(color: color, width: 3),
+            ),
+            child: Image.asset(
+              image,
+              width: 70,
+              height: 70,
             ),
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  "$rank",
-                  style: const TextStyle(
-                    fontSize: 65,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "DM Sans",
-                    color: Colors.white,
+        ),
+        Material(
+          elevation: 4, // Adjust the elevation value to get the desired shadow
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: Container(
+            width: 70,
+            padding: EdgeInsets.only(bottom: bottom),
+            decoration: const BoxDecoration(
+              color: Color(0xff66b2b2),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "$rank",
+                    style: const TextStyle(
+                      fontSize: 65,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "DM Sans",
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  "${score}pts",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: kFontText,
-                    color: Colors.white,
+                  Text(
+                    "${score}pts",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: kFontText,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-              ],
+                  const SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
             ),
           ),
         )
