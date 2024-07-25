@@ -69,6 +69,7 @@ class LogInPage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 35,
                                 fontFamily: 'Montserrat',
+                                color: Colors.white
                               ),
                             ),
                           ),

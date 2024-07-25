@@ -47,6 +47,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           },
           obscureText: widget.obscure,
           onChanged: widget.onSubmitted,
+          cursorColor: Colors.teal, // Set cursor color here
           style: TextStyle(
             fontSize: 16,
             fontFamily: 'Montserrat',

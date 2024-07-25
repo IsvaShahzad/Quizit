@@ -15,6 +15,7 @@ class SignUpTextField extends StatelessWidget {
   final IconData icon;
   final String hint;
   final bool obscure;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,6 +36,7 @@ class SignUpTextField extends StatelessWidget {
               fontFamily: 'Montserrat',
             ),
             onChanged: onChange,
+            cursorColor: Colors.teal, // Set cursor color here
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 15, top: 10),
                 hintText: hint,
@@ -74,18 +76,6 @@ class SignUpTextField extends StatelessWidget {
                   ),
                 )),
           ),
-          // Positioned(
-          //   right: -17,
-          //   bottom: -13,
-          //   child: RotatedBox(
-          //     quarterTurns: 2,
-          //     child: Icon(
-          //       Icons.play_arrow,
-          //       color: kTextAccent,
-          //       size: 25,
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
