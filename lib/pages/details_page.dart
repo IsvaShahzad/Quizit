@@ -9,7 +9,7 @@ class AddPage extends StatelessWidget {
   final AudioPlayer player = AudioPlayer();
   Future<void> playSound() async {
     String soundPath =
-        "sounds/click-button-app-147358.mp3"; //You don't need to include assets/ because AssetSource assume that you have sound in your assets folder.
+        "sounds/click-button-app-147358.mp3";
     await player.play(AssetSource(soundPath));
   }
 
@@ -317,6 +317,7 @@ class CustomDetailedContainer extends StatelessWidget {
         padding: const EdgeInsets.all(7),
         child: Icon(
           icon,
+          size: 15,
           color: Colors.white,
         ),
       ),

@@ -8,6 +8,7 @@ class IntroPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return OnBoardingWidget(
       controller: controller,
       description: "Push your limits with our engaging quizzes and uncover your knowledge across diverse topics.",

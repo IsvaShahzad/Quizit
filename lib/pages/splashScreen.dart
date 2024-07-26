@@ -53,22 +53,11 @@ class _SplashSreenState extends State<SplashSreen> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/onboarding_background.png"),
+          image: AssetImage("assets/images/splashscreen.png"),
           fit: BoxFit.cover,
         ),
       ),
-      child: Center(
-        child: AnimatedOpacity(
-          duration:
-              const Duration(milliseconds: 3000), // Duration of the animation
-          opacity: _isVisible ? 1.0 : 0.0, // Set opacity based on visibility
-          child: Image.asset(
-            "assets/images/logo 1.png",
-            width: 145,
-            height: 170,
-          ),
-        ),
-      ),
+
     );
   }
 }

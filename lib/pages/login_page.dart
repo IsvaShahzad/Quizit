@@ -25,7 +25,7 @@ class LogInPage extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          toastSuccess(message: "Welcome to Quizit!", context: context);
+          toastSuccess(message: "Welcome to QuizIt!", context: context);
           isLoading = false;
           Navigator.pushNamed(context, HomePage.id, arguments: email);
         } else if (state is LoginFailure) {
@@ -38,156 +38,151 @@ class LogInPage extends StatelessWidget {
           inAsyncCall: isLoading,
           child: Form(
             key: formKey,
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/bg1.png",
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 25, horizontal: 24),
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          // const Row(
-                          //   children: [
-                          //     ArrowButton(),
-                          //   ],
-                          // ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                          ),
-                          Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 35,
-                                fontFamily: 'Montserrat',
-                                color: Colors.white
+            child: WillPopScope(
+              onWillPop: () async => false, // Prevents going back
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                body: SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        "assets/images/bg1.png",
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 25, horizontal: 24),
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                            ),
+                            Center(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.white
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          CustomTextField(
-
-                            icon: Icons.email_outlined,
-                            label: "Email Address",
-                            onSubmitted: (data) {
-                              email = data;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          CustomTextField(
-                            icon: Icons.lock,
-                            label: "Password",
-
-                            suffixIcon: true,
-                            obscure: true,
-                            onSubmitted: (data) {
-                              if (data == requiredPassword) {
-                                // Proceed with login
-                                BlocProvider.of<LoginCubit>(context).LoginUser(
-                                    email: email, password: data);
-                              } else {
-                                // Show error toast
-                                toastFailure(
-                                  message: "Incorrect password. Please use correct password",
-                                  context: context,
-                                );
-                              }
-                            },
-                          ),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: MaterialButton(
-                              elevation: 1,
+                            const SizedBox(
                               height: 50,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  // Use required password for login
+                            ),
+                            CustomTextField(
+                              icon: Icons.email_outlined,
+                              label: "Email Address",
+                              onSubmitted: (data) {
+                                email = data;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            CustomTextField(
+                              icon: Icons.lock,
+                              label: "Password",
+                              suffixIcon: true,
+                              obscure: true,
+                              onSubmitted: (data) {
+                                if (data == requiredPassword) {
+                                  // Proceed with login
                                   BlocProvider.of<LoginCubit>(context).LoginUser(
-                                      email: email, password: requiredPassword);
+                                      email: email, password: data);
+                                } else {
+                                  // Show error toast
+                                  toastFailure(
+                                    message: "Incorrect password. Please use the correct password",
+                                    context: context,
+                                  );
                                 }
                               },
-                              color: kPrimaryColor,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "Log in",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22,
+                            ),
+                            const SizedBox(
+                              height: 60,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              child: MaterialButton(
+                                elevation: 1,
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    // Use required password for login
+                                    BlocProvider.of<LoginCubit>(context).LoginUser(
+                                        email: email, password: requiredPassword);
+                                  }
+                                },
+                                color: kPrimaryColor,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
                                     ),
-                                  ),
-                                  const SizedBox(width: 15),
-
-                                ],
+                                    Text(
+                                      "Log in",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Text(
-                            "OR",
-                            style: TextStyle(
-                              color: Colors.black45,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                            const SizedBox(
+                              height: 40,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    child: SignUpPage(),
-                                    type: PageTransitionType.rightToLeft,
-                                  ));
-                            },
-                            child: Text(
-                              "Create a new account",
+                            Text(
+                              "OR",
                               style: TextStyle(
-                                decorationColor: kTextAccent,
-                                color: kTextAccent,
+                                color: Colors.black45,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 17,
+                                fontSize: 15,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      child: SignUpPage(),
+                                      type: PageTransitionType.rightToLeft,
+                                    ));
+                              },
+                              child: Text(
+                                "Create a new account",
+                                style: TextStyle(
+                                  decorationColor: kTextAccent,
+                                  color: kTextAccent,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
