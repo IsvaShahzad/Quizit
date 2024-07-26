@@ -32,22 +32,25 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
+    return WillPopScope(
+      onWillPop: () async => false, // Prevent back navigation
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/teal.png"),
             fit: BoxFit.cover, // Ensures the image covers the entire container
-
           ),
         ),
-        child: FutureBuilder(
+        child: FutureBuilder<List<Question>>(
           future: GetQuestionsService().getQuestions(
-              type: widget.type,
-              difficulty: widget.difficulty,
-              questionNumbers: widget.questionNumber,
-              catId: widget.catId),
+            type: widget.type,
+            difficulty: widget.difficulty,
+            questionNumbers: widget.questionNumber,
+            catId: widget.catId,
+          ),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const LoadingWidget(
@@ -58,87 +61,101 @@ class _QuestionPageState extends State<QuestionPage> {
 
               return questions.isNotEmpty
                   ? QuestionUi(
-                      email: widget.email,
-                      controller: controller,
-                      questions: questions,
-                      questionsNumber: int.parse(widget.questionNumber),
-                      type: widget.type,
-                      difficulty: widget.difficulty,
-                      catId: widget.catId,
-                      questionNumber: widget.questionNumber,
-                    )
+                email: widget.email,
+                controller: controller,
+                questions: questions,
+                questionsNumber: int.parse(widget.questionNumber),
+                type: widget.type,
+                difficulty: widget.difficulty,
+                catId: widget.catId,
+                questionNumber: widget.questionNumber,
+              )
                   : Scaffold(
-                      backgroundColor: Color(0xFF8080),
-                      body: Container(
-                        height: 200,
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 200, horizontal: 30),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 25),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              blurRadius: 4,
-                              offset: const Offset(5, 5),
-                            )
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                backgroundColor: Color(0xFF8080),
+                body: Center(
+                  child: Container(
+                    height: screenSize.height * 0.25,
+                    width: screenSize.width * 0.8,
+                    margin: EdgeInsets.symmetric(
+                      vertical: screenSize.height * 0.2,
+                      horizontal: screenSize.width * 0.1,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenSize.width * 0.05,
+                      vertical: screenSize.height * 0.03,
+                    ),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 4,
+                          offset: const Offset(5, 5),
+                        )
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "There is no data for this type of questions",
+                          style: TextStyle(
+                            fontSize: 20 * textScaleFactor,
+                            fontFamily: 'Montserrat',
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "There is no data for this type of questions",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                  right: 15,
-                                  left: 15,
-                                  bottom: 15,
-                                  top: 0,
-                                ),
-                                width: double.infinity,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: kPrimaryColor,
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Change settings",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                        SizedBox(
+                          height: screenSize.height * 0.03,
                         ),
-                      ),
-                    );
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              right: screenSize.width * 0.04,
+                              left: screenSize.width * 0.04,
+                            ),
+                            width: double.infinity,
+                            height: screenSize.height * 0.06,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: kPrimaryColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Change settings",
+                                style: TextStyle(
+                                  fontSize: 16 * textScaleFactor,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
             } else {
-              return Text(snapshot.error.toString());
+              return Center(
+                child: Text(
+                  snapshot.error.toString(),
+                  style: TextStyle(
+                    fontSize: 16 * textScaleFactor,
+                    fontFamily: 'Montserrat',
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              );
             }
           },
         ),

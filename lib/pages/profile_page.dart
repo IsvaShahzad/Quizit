@@ -114,7 +114,7 @@ class ProfilePage extends StatelessWidget {
                     Tab(
                       icon: Container(
                         height: 25,
-                        padding: const EdgeInsets.only(right: 25),
+                        padding: const EdgeInsets.only(right: 26),
                         decoration: const BoxDecoration(
                           border: Border(
                             right: BorderSide(

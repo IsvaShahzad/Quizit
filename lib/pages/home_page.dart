@@ -27,6 +27,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     if (first == true) {
       email = emails;
     } else {
@@ -66,7 +69,21 @@ class HomePage extends StatelessWidget {
               first: first,
             );
           } else {
-            return Text(snapshot.error.toString());
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenSize.width * 0.1, // Responsive padding
+                ),
+                child: Text(
+                  snapshot.error.toString(),
+                  style: TextStyle(
+                    fontSize: 16 * textScaleFactor, // Responsive font size
+                    color: Colors.red,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
           }
         },
       ),

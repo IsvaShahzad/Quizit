@@ -10,6 +10,9 @@ class GetStartedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -19,7 +22,10 @@ class GetStartedPage extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenSize.width * 0.03, // Responsive horizontal padding
+            vertical: screenSize.height * 0.02,  // Responsive vertical padding
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -30,10 +36,12 @@ class GetStartedPage extends StatelessWidget {
                 flex: 1,
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2.9,
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenSize.width * 0.07, // Responsive horizontal padding
+                  vertical: screenSize.height * 0.02,  // Responsive vertical padding
+                ),
+                width: screenSize.width,
+                height: screenSize.height / 2.9,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
@@ -44,10 +52,9 @@ class GetStartedPage extends StatelessWidget {
                       flex: 2,
                     ),
                     Text(
-                      "LogIn Or Sign up",
+                      "Log In Or Sign Up",
                       style: TextStyle(
-
-                        fontSize: 20,
+                        fontSize: 20 * textScaleFactor,  // Responsive font size
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                       ),
@@ -61,7 +68,7 @@ class GetStartedPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           PageTransition(
-                            child: LogInPage(),
+                            child:  LogInPage(),
                             type: PageTransitionType.fade,
                             duration: const Duration(milliseconds: 500),
                             reverseDuration: const Duration(milliseconds: 500),
@@ -72,13 +79,13 @@ class GetStartedPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       color: kPrimaryColor,
-                      minWidth: MediaQuery.of(context).size.width * 0.78,
+                      minWidth: screenSize.width * 0.78, // Responsive button width
                       height: 50,
                       child: Text(
                         "Log in",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 18 * textScaleFactor,  // Responsive font size
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                         ),
@@ -93,7 +100,7 @@ class GetStartedPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           PageTransition(
-                            child: SignUpPage(),
+                            child:  SignUpPage(),
                             type: PageTransitionType.fade,
                             duration: const Duration(milliseconds: 500),
                             reverseDuration: const Duration(milliseconds: 500),
@@ -104,13 +111,13 @@ class GetStartedPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       color: const Color(0xFFDEDEDE),
-                      minWidth: MediaQuery.of(context).size.width * 0.78,
+                      minWidth: screenSize.width * 0.78, // Responsive button width
                       height: 50,
                       child: Text(
                         "Create an Account",
                         style: TextStyle(
                           color: const Color(0xFF006666),
-                          fontSize: 18,
+                          fontSize: 18 * textScaleFactor,  // Responsive font size
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                         ),

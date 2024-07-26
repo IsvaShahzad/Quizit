@@ -4,10 +4,11 @@ import 'package:quiz_app/data.dart';
 import 'package:quiz_app/widgets/history_container.dart';
 
 class SecoundProfileTab extends StatelessWidget {
-  SecoundProfileTab({
+   SecoundProfileTab({
     super.key,
     required this.data,
   });
+
   final Map<String, dynamic> data;
   final LinearGradient gradient = const LinearGradient(
     colors: [
@@ -31,8 +32,15 @@ class SecoundProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+
     return Padding(
-      padding: const EdgeInsets.only(top: 30, bottom: 15),
+      padding: EdgeInsets.symmetric(
+        vertical: screenHeight * 0.02, // Adjust vertical padding based on screen height
+        horizontal: screenWidth * 0.05, // Adjust horizontal padding based on screen width
+      ),
       child: ListView.builder(
         clipBehavior: Clip.none,
         itemCount: data["history"].length,
@@ -45,13 +53,16 @@ class SecoundProfileTab extends StatelessWidget {
           String difficulty = data["history"][index]["difficulty"];
           int correctQuestions = data["history"][index]["correctQuestions"];
           int questionNumbers = data["history"][index]["questionNumbers"];
-          return HistoryContainer(
-            gradient: gradient,
-            title: "Earned $score points on the $difficulty quiz",
-            subtitle: catName,
-            date: dateString,
-            correct: "$correctQuestions/$questionNumbers Correct",
-            image: getImageForCategory(catName),
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01), // Adjust vertical spacing based on screen height
+            child: HistoryContainer(
+              gradient: gradient,
+              title: "Earned $score points on the $difficulty quiz",
+              subtitle: catName,
+              date: dateString,
+              correct: "$correctQuestions/$questionNumbers Correct",
+              image: getImageForCategory(catName),
+            ),
           );
         },
       ),

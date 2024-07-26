@@ -14,6 +14,7 @@ class CatSettingsPage extends StatefulWidget {
     required this.catId,
     required this.email,
   });
+
   static String id = "catSettingsPage";
   final int catId;
   final String email;
@@ -32,6 +33,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
   int questionIndex = -1;
   final AudioPlayer player = AudioPlayer();
   final AudioPlayer player2 = AudioPlayer();
+
   Future<void> playSound2() async {
     String soundPath = "sounds/456601__bumpelsnake__select10.wav";
     await player2.play(AssetSource(soundPath));
@@ -44,6 +46,9 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -57,9 +62,9 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xFF008080),
+        backgroundColor: const Color(0xFF008080),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:0, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
           child: Column(
             children: [
               AppBar(
@@ -96,10 +101,10 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           );
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         "Next",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 25 * textScaleFactor, // Responsive font size
                           color: Colors.white,
                           fontFamily: 'Montserrat',
                         ),
@@ -127,10 +132,14 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  margin: EdgeInsets.symmetric(
+                    vertical: screenSize.height * 0.02,
+                    horizontal: screenSize.width * 0.03,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: screenSize.height * 0.01,
+                    horizontal: screenSize.width * 0.03,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
                     color: Colors.white,
@@ -141,15 +150,16 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                       const Spacer(
                         flex: 1,
                       ),
-                      const Text(
+                      Text(
                         "Quiz zone",
                         style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'Montserrat',
-                            color: Colors.black),
+                          fontSize: 20 * textScaleFactor, // Responsive font size
+                          fontFamily: 'Montserrat',
+                          color: Colors.black,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 13,
+                      SizedBox(
+                        height: screenSize.height * 0.02,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,41 +220,41 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 35,
+                      SizedBox(
+                        height: screenSize.height * 0.04,
                       ),
-                      const Text(
+                      Text(
                         "Play Zone",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20 * textScaleFactor, // Responsive font size
                           fontFamily: 'Montserrat',
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(
-                        height: 13,
+                      SizedBox(
+                        height: screenSize.height * 0.02,
                       ),
-                      const Row(
+                      Row(
                         children: [
                           SizedBox(
-                            width: 5,
+                            width: screenSize.width * 0.02,
                           ),
-                          Icon(Icons.pending_actions),
+                          const Icon(Icons.pending_actions),
                           SizedBox(
-                            width: 5,
+                            width: screenSize.width * 0.02,
                           ),
                           Text(
                             "Choose the Type of questions :",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12 * textScaleFactor, // Responsive font size
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: screenSize.height * 0.02,
                       ),
                       TypeContainer(
                         title: "True/False",
@@ -264,8 +274,8 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           });
                         },
                       ),
-                      const SizedBox(
-                        height: 13,
+                      SizedBox(
+                        height: screenSize.height * 0.02,
                       ),
                       TypeContainer(
                         title: "Multiple Choice",
@@ -275,7 +285,7 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                         onTap: () {
                           playSound2();
                           setState(
-                            () {
+                                () {
                               if (typeSelectedIndex == 1) {
                                 typeSelectedIndex = -1;
                                 type = null;
@@ -287,30 +297,30 @@ class _CatSettingsPageState extends State<CatSettingsPage> {
                           );
                         },
                       ),
-                      const SizedBox(
-                        height: 40,
+                      SizedBox(
+                        height: screenSize.height * 0.04,
                       ),
-                      const Row(
+                      Row(
                         children: [
                           SizedBox(
-                            width: 5,
+                            width: screenSize.width * 0.02,
                           ),
-                          Icon(Icons.quiz_outlined),
+                          const Icon(Icons.quiz_outlined),
                           SizedBox(
-                            width: 5,
+                            width: screenSize.width * 0.02,
                           ),
                           Text(
                             "Choose the Number of questions :",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12 * textScaleFactor, // Responsive font size
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: screenSize.height * 0.01,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

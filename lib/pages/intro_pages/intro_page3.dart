@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
@@ -12,6 +10,9 @@ class IntroPage3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -20,21 +21,26 @@ class IntroPage3 extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+        padding: EdgeInsets.symmetric(
+          horizontal: screenSize.width * 0.03, // Responsive horizontal padding
+          vertical: screenSize.height * 0.02,  // Responsive vertical padding
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(
               flex: 4,
             ),
-            // Image.asset("assets/images/onBoarding3.png"),
             const Spacer(
               flex: 1,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 3.9,
+              padding: EdgeInsets.symmetric(
+                horizontal: screenSize.width * 0.07, // Responsive horizontal padding
+                vertical: screenSize.height * 0.03,  // Responsive vertical padding
+              ),
+              width: screenSize.width,
+              height: screenSize.height / 3.9,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
@@ -45,7 +51,7 @@ class IntroPage3 extends StatelessWidget {
                     "Demonstrate your expertise and excel as a quiz master by answering challenging questions across different subjects.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 15 * textScaleFactor,  // Responsive text size
                       fontFamily: kFontText,
                     ),
                   ),
@@ -65,13 +71,13 @@ class IntroPage3 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     color: kPrimaryColor,
-                    minWidth: MediaQuery.of(context).size.width * 0.78,
+                    minWidth: screenSize.width * 0.78, // Responsive button width
                     height: 50,
                     child: Text(
                       "Get Started",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: 22 * textScaleFactor,  // Responsive button text size
                         fontWeight: FontWeight.bold,
                         fontFamily: kFontText,
                       ),

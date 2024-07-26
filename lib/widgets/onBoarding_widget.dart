@@ -6,7 +6,7 @@ class OnBoardingWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.image,
-    required this.description,
+    required this.description, required double imageHeight, required double imageWidth,
   });
 
   final String image;

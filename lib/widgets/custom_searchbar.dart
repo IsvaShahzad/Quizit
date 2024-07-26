@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
@@ -9,9 +7,9 @@ import 'package:quiz_app/pages/question_setting.dart';
 
 class CustomSearchBar extends StatelessWidget {
   CustomSearchBar({
-    super.key,
+    Key? key,
     required this.email,
-  });
+  }) : super(key: key);
 
   final TextEditingController controller = TextEditingController();
   final String email;
@@ -25,21 +23,23 @@ class CustomSearchBar extends StatelessWidget {
         return true;
       }
     }
-
     return false;
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Building CustomSearchBar'); // Debug print
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 36),
       child: TextField(
         controller: controller,
         onSubmitted: (data) {
+          print("Search submitted: $data"); // Debug print
           if (exist(
             catName: data.toLowerCase().trim(),
             list: catData.catList,
           )) {
+            print("Category exists, navigating to CatSettingsPage"); // Debug print
             Navigator.push(
               context,
               PageTransition(
@@ -50,6 +50,7 @@ class CustomSearchBar extends StatelessWidget {
             );
             controller.clear();
           } else {
+            print("Category does not exist"); // Debug print
             toastFailure(
                 message: "This category does not exist.", context: context);
             controller.clear();

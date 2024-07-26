@@ -7,16 +7,20 @@ class AddPage extends StatelessWidget {
   AddPage({super.key, required this.email});
   final String email;
   final AudioPlayer player = AudioPlayer();
+
   Future<void> playSound() async {
-    String soundPath =
-        "sounds/click-button-app-147358.mp3";
+    String soundPath = "sounds/click-button-app-147358.mp3";
     await player.play(AssetSource(soundPath));
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double appBarHeight = kToolbarHeight; // Default app bar height
+
+    return WillPopScope(
+      onWillPop: () async => false, // Disable back navigation
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
@@ -31,19 +35,20 @@ class AddPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              AppBar(
-                automaticallyImplyLeading: false,
-                clipBehavior: Clip.none,
-                backgroundColor: Colors.transparent,
-                actions: [
-                  Image.asset("assets/images/man.png"),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
+              Container(
+                height: appBarHeight,
+                child: AppBar(
+                  automaticallyImplyLeading: false,
+                  clipBehavior: Clip.none,
+                  backgroundColor: Colors.transparent,
+                  actions: [
+                    Image.asset("assets/images/man.png"),
+                    SizedBox(width: screenWidth * 0.04),
+                  ],
+                ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: screenHeight * 0.20, // Adjust spacing from top
               ),
               Expanded(
                 child: Container(
@@ -53,17 +58,20 @@ class AddPage extends StatelessWidget {
                     borderRadius: BorderRadiusDirectional.circular(30),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 12, left: 12),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.04,
+                      vertical: screenHeight * 0.02,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Center(
                           child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 20,
-                              bottom: 20,
+                            margin: EdgeInsets.only(
+                              top: screenHeight * 0.02,
+                              bottom: screenHeight * 0.02,
                             ),
-                            width: 55,
+                            width: screenWidth * 0.2,
                             height: 4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -76,33 +84,30 @@ class AddPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Text(
+                        Text(
                           "Quiz details",
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: "Montserrat",
-                            fontSize: 23,
+                            fontSize: screenWidth * 0.06,
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: screenHeight * 0.02),
                         Container(
                           width: double.infinity,
-                          height: 64,
+                          height: screenHeight * 0.08,
                           decoration: BoxDecoration(
                             color: kSecondaryColor.withOpacity(0.36),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.02),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 CustomDetailedContainer(
                                   icon: Icons.article_outlined,
-
-
                                 ),
                                 CustomDetailedText(
                                   text: "1 Question",
@@ -123,41 +128,45 @@ class AddPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Spacer(
-                          flex: 1,
+                        SizedBox(
+                          height: 20,
                         ),
-                        const Text(
+                        Text(
                           "Brief explanation about quiz",
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: "Montserrat",
-                            fontSize: 20,
+                            fontSize: screenWidth * 0.05,
                           ),
                         ),
-                        const SizedBox(
-                          height: 25,
+                        SizedBox(height: screenHeight * 0.00),
+                        Expanded(
+                          child: ListView(
+                            children: const [
+                              CustomListTile(
+                                title:
+                                    "10 points awarded for a correct answer and no points for an incorrect answer",
+                              ),
+                              CustomListTile(
+                                title:
+                                    "30 seconds allotted to answer one question.",
+                              ),
+                              CustomListTile(
+                                title:
+                                    "Tap on options to select the correct answer",
+                              ),
+                              CustomListTile(
+                                title:
+                                    "Tap on the button Next to move to the next question",
+                              ),
+                              CustomListTile(
+                                title:
+                                    "Click submit if you completed all the questions",
+                              ),
+                            ],
+                          ),
                         ),
-                        const CustomListTile(
-                          title:
-                              "10 points awarded for a correct answer and no points for a incorrect answer",
-                        ),
-                        const CustomListTile(
-                          title: "30 seconds allotted to answer one question. ",
-                        ),
-                        const CustomListTile(
-                          title: "Tap on options to select the correct answer",
-                        ),
-                        const CustomListTile(
-                          title:
-                              "Tap on button Next to move to the next question",
-                        ),
-                        const CustomListTile(
-                          title:
-                              "Click submit if you completed all the questions",
-                        ),
-                        const Spacer(
-                          flex: 4,
-                        ),
+                        SizedBox(height: screenHeight * 0.03),
                         GestureDetector(
                           onTap: () {
                             playSound();
@@ -168,14 +177,12 @@ class AddPage extends StatelessWidget {
                             );
                           },
                           child: Container(
-                            margin: const EdgeInsets.only(
-                              right: 15,
-                              left: 15,
-                              bottom: 20,
-                              top: 0,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.04,
+                              vertical: screenHeight * 0.02,
                             ),
                             width: double.infinity,
-                            height: 50,
+                            height: screenHeight * 0.07,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               gradient: const LinearGradient(
@@ -185,43 +192,34 @@ class AddPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            child: const Row(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Spacer(
-                                  flex: 1,
-                                ),
                                 Text(
                                   "Let's Play",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: screenWidth * 0.04,
                                     fontFamily: "Montserrat",
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                SizedBox(width: screenWidth * 0.02),
                                 Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: Colors.white,
-                                  size: 15,
-                                ),
-                                Spacer(
-                                  flex: 1,
+                                  size: screenWidth * 0.04,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        const Spacer(
-                          flex: 2,
-                        ),
+                        SizedBox(height: screenHeight * 0.03),
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -257,8 +255,8 @@ class CustomListTile extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 13,
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.04,
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
@@ -282,8 +280,8 @@ class CustomDetailedText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 13.5,
+      style: TextStyle(
+        fontSize: MediaQuery.of(context).size.width * 0.04,
         fontFamily: "Montserrat",
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -317,7 +315,7 @@ class CustomDetailedContainer extends StatelessWidget {
         padding: const EdgeInsets.all(7),
         child: Icon(
           icon,
-          size: 15,
+          size: MediaQuery.of(context).size.width * 0.04,
           color: Colors.white,
         ),
       ),

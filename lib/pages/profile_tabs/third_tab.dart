@@ -4,7 +4,7 @@ import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/widgets/label_widger.dart';
 
 class ThirdProfileTab extends StatefulWidget {
-  ThirdProfileTab({
+  const ThirdProfileTab({
     super.key,
     required this.data,
   });
@@ -39,31 +39,37 @@ class _ThirdProfileTabState extends State<ThirdProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 39),
+      padding: EdgeInsets.symmetric(
+        vertical: screenWidth * 0.1, // Adjust vertical padding based on screen width
+        horizontal: screenWidth * 0.05, // Adjust horizontal padding based on screen width
+      ),
       child: Form(
         key: formKey,
         child: ListView(
           children: [
             const Label(text: "Username"),
-            const SizedBox(height: 2),
+            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
             ProfileTextField(controller: usernameController),
-            const SizedBox(height: 20),
+            SizedBox(height: screenWidth * 0.05), // Adjust spacing based on screen width
             const Label(text: "Email"),
-            const SizedBox(height: 2),
+            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
             ProfileTextField(
               controller: emailController,
               enabled: true,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenWidth * 0.05), // Adjust spacing based on screen width
             const Label(text: "Password"),
-            const SizedBox(height: 2),
+            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
             ProfileTextField(
               controller: passwordController,
               obscure: true,
               enabled: true,
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: screenWidth * 0.1), // Adjust spacing based on screen width
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -87,13 +93,13 @@ class _ThirdProfileTabState extends State<ThirdProfileTab> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   "Update",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: screenWidth * 0.04, // Adjust font size based on screen width
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.bold,
-                    color: Color(0xff006666),
+                    color: const Color(0xff006666),
                   ),
                 ),
               ),
@@ -146,6 +152,9 @@ class ProfileTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+
     return TextFormField(
       cursorColor: Colors.teal,
       validator: (value) {
@@ -159,11 +168,14 @@ class ProfileTextField extends StatelessWidget {
       obscureText: obscure,
       style: TextStyle(
         fontFamily: kFontText,
-        fontSize: 13,
+        fontSize: screenWidth * 0.03, // Adjust font size based on screen width
         color: Colors.white,
       ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.04, // Adjust horizontal padding based on screen width
+          vertical: screenWidth * 0.03, // Adjust vertical padding based on screen width
+        ),
         suffixIcon: const Icon(
           Icons.edit,
           color: Colors.white,

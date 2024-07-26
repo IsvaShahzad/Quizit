@@ -19,6 +19,9 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupLoading) {
@@ -57,32 +60,30 @@ class SignUpPage extends StatelessWidget {
                 body: ListView(
                   clipBehavior: Clip.none,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                      // child: Row(
-                      //   children: [
-                      //     ArrowButton(),
-                      //   ],
-                      // ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * 0.06, // Responsive horizontal padding
+                        vertical: screenSize.height * 0.01, // Responsive vertical padding
+                      ),
+                      // Add any additional widgets if needed
                     ),
-                    const SizedBox(
-                      height: 75,
+                    SizedBox(
+                      height: screenSize.height * 0.1, // Responsive height
                     ),
                     Center(
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 35 * textScaleFactor, // Responsive font size
                           fontFamily: 'Montserrat',
                           letterSpacing: 2,
                           fontWeight: FontWeight.w300,
-                          color: Colors.white
-
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: screenSize.height * 0.02, // Responsive height
                     ),
                     SignUpTextField(
                       hint: "User Name",
@@ -99,7 +100,6 @@ class SignUpPage extends StatelessWidget {
                       },
                     ),
                     SignUpTextField(
-
                       hint: "Password",
                       icon: Icons.lock,
                       obscure: true,
@@ -108,11 +108,14 @@ class SignUpPage extends StatelessWidget {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 41, vertical: 32),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * 0.1, // Responsive horizontal padding
+                        vertical: screenSize.height * 0.04, // Responsive vertical padding
+                      ),
                       child: MaterialButton(
                         elevation: 2,
-                        height: 50,
-                        minWidth: 320,
+                        height: screenSize.height * 0.06, // Responsive height
+                        minWidth: screenSize.width * 0.8, // Responsive width
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -143,20 +146,21 @@ class SignUpPage extends StatelessWidget {
                                 color: Colors.white,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                                fontSize: 22 * textScaleFactor, // Responsive font size
                               ),
                             ),
-
                           ],
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(
+                        bottom: screenSize.height * 0.02, // Responsive padding
+                      ),
                       child: Text(
                         "OR",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18 * textScaleFactor, // Responsive font size
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[700],
@@ -175,7 +179,7 @@ class SignUpPage extends StatelessWidget {
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
-                          fontSize: 13,
+                          fontSize: 13 * textScaleFactor, // Responsive font size
                         ),
                         textAlign: TextAlign.center,
                       ),

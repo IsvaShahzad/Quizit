@@ -4,7 +4,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/helper/show_toast.dart';
-
 import 'package:quiz_app/pages/cubits/login_cubit/login_cubit.dart';
 import 'package:quiz_app/pages/home_page.dart';
 import 'package:quiz_app/pages/sign_up_page.dart';
@@ -13,19 +12,22 @@ import 'package:quiz_app/widgets/Login_textfield.dart';
 
 class LogInPage extends StatelessWidget {
   static String id = "/LoginPage";
-  String? email;
   final String requiredPassword = "p455w0rd";
-  bool isLoading = false;
   GlobalKey<FormState> formKey = GlobalKey();
+  String? email;
+  String? password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          toastSuccess(message: "Welcome to QuizIt!", context: context);
           isLoading = false;
           Navigator.pushNamed(context, HomePage.id, arguments: email);
         } else if (state is LoginFailure) {
@@ -47,31 +49,33 @@ class LogInPage extends StatelessWidget {
                     children: [
                       Image.asset(
                         "assets/images/bg1.png",
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
+                        width: screenSize.width,
+                        height: screenSize.height,
                         fit: BoxFit.cover,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 25, horizontal: 24),
+                        padding: EdgeInsets.symmetric(
+                          vertical: screenSize.height * 0.03, // Responsive vertical padding
+                          horizontal: screenSize.width * 0.06, // Responsive horizontal padding
+                        ),
                         child: ListView(
                           shrinkWrap: true,
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.15,
+                              height: screenSize.height * 0.15,
                             ),
                             Center(
                               child: Text(
                                 "Login",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.white
+                                  fontSize: 35 * textScaleFactor, // Responsive font size
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 50,
+                            SizedBox(
+                              height: screenSize.height * 0.06,
                             ),
                             CustomTextField(
                               icon: Icons.email_outlined,
@@ -80,8 +84,8 @@ class LogInPage extends StatelessWidget {
                                 email = data;
                               },
                             ),
-                            const SizedBox(
-                              height: 40,
+                            SizedBox(
+                              height: screenSize.height * 0.05,
                             ),
                             CustomTextField(
                               icon: Icons.lock,
@@ -89,43 +93,48 @@ class LogInPage extends StatelessWidget {
                               suffixIcon: true,
                               obscure: true,
                               onSubmitted: (data) {
-                                if (data == requiredPassword) {
-                                  // Proceed with login
-                                  BlocProvider.of<LoginCubit>(context).LoginUser(
-                                      email: email, password: data);
-                                } else {
-                                  // Show error toast
-                                  toastFailure(
-                                    message: "Incorrect password. Please use the correct password",
-                                    context: context,
-                                  );
-                                }
+                                password = data;
                               },
                             ),
-                            const SizedBox(
-                              height: 60,
+                            SizedBox(
+                              height: screenSize.height * 0.07,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenSize.width * 0.07, // Responsive horizontal padding
+                              ),
                               child: MaterialButton(
                                 elevation: 1,
-                                height: 50,
+                                height: screenSize.height * 0.06, // Responsive height
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    // Use required password for login
-                                    BlocProvider.of<LoginCubit>(context).LoginUser(
-                                        email: email, password: requiredPassword);
+                                    // Check if password is correct
+                                    if (password == requiredPassword) {
+                                      // Proceed with login
+                                      BlocProvider.of<LoginCubit>(context).LoginUser(
+                                        email: email,
+                                        password: password!,
+                                      );
+                                    } else {
+                                      // Show error toast
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text('Incorrect password.'),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
                                 color: kPrimaryColor,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const SizedBox(
-                                      width: 20,
+                                    SizedBox(
+                                      width: screenSize.width * 0.05, // Responsive spacing
                                     ),
                                     Text(
                                       "Log in",
@@ -133,16 +142,16 @@ class LogInPage extends StatelessWidget {
                                         color: Colors.white,
                                         fontFamily: 'Montserrat',
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 22,
+                                        fontSize: 22 * textScaleFactor, // Responsive font size
                                       ),
                                     ),
-                                    const SizedBox(width: 15),
+                                    SizedBox(width: screenSize.width * 0.04), // Responsive spacing
                                   ],
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 40,
+                            SizedBox(
+                              height: screenSize.height * 0.05,
                             ),
                             Text(
                               "OR",
@@ -150,21 +159,22 @@ class LogInPage extends StatelessWidget {
                                 color: Colors.black45,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                                fontSize: 15 * textScaleFactor, // Responsive font size
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: screenSize.height * 0.03,
                             ),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      child: SignUpPage(),
-                                      type: PageTransitionType.rightToLeft,
-                                    ));
+                                  context,
+                                  PageTransition(
+                                    child: SignUpPage(),
+                                    type: PageTransitionType.rightToLeft,
+                                  ),
+                                );
                               },
                               child: Text(
                                 "Create a new account",
@@ -173,7 +183,7 @@ class LogInPage extends StatelessWidget {
                                   color: kTextAccent,
                                   fontFamily: 'Montserrat',
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: 17 * textScaleFactor, // Responsive font size
                                 ),
                                 textAlign: TextAlign.center,
                               ),

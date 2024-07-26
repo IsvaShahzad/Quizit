@@ -133,7 +133,7 @@ class _QuestionUiState extends State<QuestionUi> {
               },
               child: Text(
                 questionSelectedIndex == widget.questionsNumber - 1
-                    ? "Done"
+                    ? ""
                     : "Next",
                 style: const TextStyle(
                   fontSize: 22,
@@ -160,7 +160,7 @@ class _QuestionUiState extends State<QuestionUi> {
                 child: Container(
                   width: double.infinity,
                   height: widget.questionsNumber == 10 ? 250.16 : 215,
-                  padding: const EdgeInsets.all(16), // Adjusted padding
+                  padding: const EdgeInsets.all(15), // Adjusted padding
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),

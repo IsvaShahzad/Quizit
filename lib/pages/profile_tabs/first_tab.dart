@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:quiz_app/constants.dart';
@@ -6,10 +5,11 @@ import 'package:quiz_app/data.dart';
 import 'package:quiz_app/widgets/stats_container.dart';
 
 class FirstProfileTab extends StatelessWidget {
-  FirstProfileTab({
+   FirstProfileTab({
     super.key,
     required this.data,
   });
+
   final Map<String, dynamic> data;
   final List<Map<String, dynamic>> historyList = [];
   final List<Map<String, dynamic>> strongestCat = [];
@@ -23,6 +23,7 @@ class FirstProfileTab extends StatelessWidget {
   bool exist = false;
   int? index;
   final CategoriesData catdata = CategoriesData();
+
   String getImageForCategory(String categoryName) {
     categoryName = categoryName.replaceFirst("Science: ", "");
     categoryName = categoryName.replaceFirst("Entertainment: ", "");
@@ -31,12 +32,15 @@ class FirstProfileTab extends StatelessWidget {
         return category['image'];
       }
     }
-
     return '';
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+
     List<dynamic> history = data["history"];
     historyList.add({
       'catName': history[0]["catName"],
@@ -60,7 +64,7 @@ class FirstProfileTab extends StatelessWidget {
         });
       } else {
         historyList[index!]['correctQuestions'] +=
-            history[i]["correctQuestions"];
+        history[i]["correctQuestions"];
         historyList[index!]['questionNumbers'] += history[i]["questionNumbers"];
       }
     }
@@ -84,9 +88,13 @@ class FirstProfileTab extends StatelessWidget {
     final double accuracy =
         (data["correctAnswer"] * 100) / data["totalQuestions"];
     final double progress = (data["totalQuestions"] * 100) / 19206;
-    final double averageScpre = data["score"] / data["totalQuestions"];
+    final double averageScore = data["score"] / data["totalQuestions"];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        vertical: screenHeight * 0.03, // Adjust vertical padding
+        horizontal: screenWidth * 0.05, // Adjust horizontal padding
+      ),
       child: ListView(
         clipBehavior: Clip.none,
         children: [
@@ -103,14 +111,12 @@ class FirstProfileTab extends StatelessWidget {
                 color: const Color(0xffD1AEE5).withOpacity(0.35),
                 image: "assets/icons/bar.png",
                 subTitle: "Avg.Score",
-                title: "${averageScpre.round()}",
-                size: 12,
+                title: "${averageScore.round()}",
+                size: screenWidth * 0.03, // Adjust text size
               ),
             ],
           ),
-          const SizedBox(
-            height: 11,
-          ),
+          SizedBox(height: screenHeight * 0.02), // Adjust spacing
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -124,141 +130,134 @@ class FirstProfileTab extends StatelessWidget {
                 color: const Color(0xff4DC3FF).withOpacity(0.15),
                 image: "assets/icons/rise 1.png",
                 subTitle: "Progress",
-                title: progress.toString().length > 5
-                    ? "${progress.toString().substring(0, 4)}%"
-                    : "$progress%",
+                title: progress.toStringAsFixed(2) + '%',
               ),
             ],
           ),
-          const SizedBox(
-            height: 25,
-          ),
+          SizedBox(height: screenHeight * 0.03), // Adjust spacing
           strongestCat.isEmpty
               ? Container()
               : Text(
-                  "STRONGEST THEMES",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: kFontText,
-                    color: Colors.white,
-                  ),
-                ),
-          const SizedBox(
-            height: 8,
+            "PERFORMANCEe",
+            style: TextStyle(
+              fontSize: screenWidth * 0.04, // Adjust font size
+              fontWeight: FontWeight.w600,
+              fontFamily: kFontText,
+              color: Colors.white,
+            ),
           ),
+          SizedBox(height: screenHeight * 0.02), // Adjust spacing
           strongestCat.isEmpty
               ? Container()
               : Container(
-                  width: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xffA6ABBD).withOpacity(0.8),
-                        spreadRadius: 0,
-                        blurRadius: 18.5,
-                        offset: const Offset(
-                            2.5, 2.5), // changes position of shadow
-                      ),
-                      BoxShadow(
-                        color: const Color(0xffFAFBFF).withOpacity(0.4),
-                        offset: const Offset(-1.24, -1.24),
-                        blurRadius: 16,
-                      )
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(23),
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: strongestCat.length,
-                    itemBuilder: (context, index) => ProgressStatContainer(
-                      gradient: gradient,
-                      gradientPercentage: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xffFFD894),
-                          Color(0xffFFD388),
-                          Color(0xffFFB33E),
-                          Color(0xffFF9801),
-                          Color(0xffFFA113),
-                          Color(0xffFFA318),
-                          Color(0xffFF9900),
-                        ],
-                      ),
-                      catName: strongestCat[index]["catName"],
-                      image: strongestCat[index]["image"],
-                      percentage: strongestCat[index]["percentage"],
-                    ),
-                  ),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.02, // Adjust vertical padding
+              horizontal: screenWidth * 0.03, // Adjust horizontal padding
+            ),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xffA6ABBD).withOpacity(0.8),
+                  spreadRadius: 0,
+                  blurRadius: 18.5,
+                  offset: const Offset(2.5, 2.5), // changes position of shadow
                 ),
-          const SizedBox(
-            height: 25,
+                BoxShadow(
+                  color: const Color(0xffFAFBFF).withOpacity(0.4),
+                  offset: const Offset(-1.24, -1.24),
+                  blurRadius: 16,
+                )
+              ],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(23),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemCount: strongestCat.length,
+              itemBuilder: (context, index) => ProgressStatContainer(
+                gradient: gradient,
+                gradientPercentage: const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xffFFD894),
+                    Color(0xffFFD388),
+                    Color(0xffFFB33E),
+                    Color(0xffFF9801),
+                    Color(0xffFFA113),
+                    Color(0xffFFA318),
+                    Color(0xffFF9900),
+                  ],
+                ),
+                catName: strongestCat[index]["catName"],
+                image: strongestCat[index]["image"],
+                percentage: strongestCat[index]["percentage"],
+              ),
+            ),
           ),
+          SizedBox(height: screenHeight * 0.03), // Adjust spacing
           weakestCat.isEmpty
               ? Container()
               : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "PERFORMANCE ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: kFontText,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      // height: MediaQuery.of(context).size.height * 0.22,
-                      width: double.infinity,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xffA6ABBD).withOpacity(0.8),
-                            spreadRadius: 0,
-                            blurRadius: 18.5,
-                            offset: const Offset(
-                                2.5, 2.5), // changes position of shadow
-                          ),
-                          BoxShadow(
-                            color: const Color(0xffFAFBFF).withOpacity(0.4),
-                            offset: const Offset(-1.24, -1.24),
-                            blurRadius: 16,
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: weakestCat.length,
-                        itemBuilder: (context, index) => ProgressStatContainer(
-                          gradient: gradient,
-                          gradientPercentage: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Color(0xff77CDFA),
-                              Color(0xff2E7599),
-                            ],
-                          ),
-                          catName: weakestCat[index]["catName"],
-                          image: weakestCat[index]["image"],
-                          percentage: weakestCat[index]["percentage"],
-                        ),
-                      ),
-                    ),
-                  ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "PERFORMANCE",
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04, // Adjust font size
+                  fontWeight: FontWeight.w600,
+                  fontFamily: kFontText,
+                  color: Colors.white,
                 ),
+              ),
+              SizedBox(height: screenHeight * 0.02), // Adjust spacing
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  vertical: screenHeight * 0.02, // Adjust vertical padding
+                  horizontal: screenWidth * 0.03, // Adjust horizontal padding
+                ),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xffA6ABBD).withOpacity(0.8),
+                      spreadRadius: 0,
+                      blurRadius: 18.5,
+                      offset: const Offset(2.5, 2.5), // changes position of shadow
+                    ),
+                    BoxShadow(
+                      color: const Color(0xffFAFBFF).withOpacity(0.4),
+                      offset: const Offset(-1.24, -1.24),
+                      blurRadius: 16,
+                    )
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(23),
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: weakestCat.length,
+                  itemBuilder: (context, index) => ProgressStatContainer(
+                    gradient: gradient,
+                    gradientPercentage: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xff77CDFA),
+                        Color(0xff2E7599),
+                      ],
+                    ),
+                    catName: weakestCat[index]["catName"],
+                    image: weakestCat[index]["image"],
+                    percentage: weakestCat[index]["percentage"],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -281,18 +280,19 @@ class ProgressStatContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: EdgeInsets.only(bottom: screenWidth * 0.03), // Adjust margin
       child: Row(
         children: [
           Image.asset(
             image,
-            width: 50,
-            height: 40,
+            width: screenWidth * 0.12, // Adjust image width
+            height: screenWidth * 0.1, // Adjust image height
           ),
-          const SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: screenWidth * 0.02), // Adjust spacing
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,8 +305,8 @@ class ProgressStatContainer extends StatelessWidget {
                       shaderCallback: (rect) => gradient.createShader(rect),
                       child: Text(
                         catName,
-                        style: const TextStyle(
-                          fontSize: 15,
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.04, // Adjust font size
                           fontFamily: "Oldenburg",
                         ),
                       ),
@@ -315,12 +315,13 @@ class ProgressStatContainer extends StatelessWidget {
                       "$percentage% Correct",
                       style: TextStyle(
                           color: const Color(0xffBDBDBD),
-                          fontSize: 10,
+                          fontSize: screenWidth * 0.03, // Adjust font size
                           fontFamily: kFontText,
                           fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
+                SizedBox(height: screenWidth * 0.02), // Adjust spacing
                 LinearPercentIndicator(
                   animation: true,
                   animationDuration: 1000,
@@ -329,7 +330,7 @@ class ProgressStatContainer extends StatelessWidget {
                   percent: percentage / 100,
                   backgroundColor: const Color(0xffDEDEDE),
                   linearGradient: gradientPercentage,
-                  padding: const EdgeInsets.all(0),
+                  padding: EdgeInsets.zero,
                 )
               ],
             ),

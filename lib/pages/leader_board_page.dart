@@ -55,135 +55,143 @@ class LeaderBoardPage extends StatelessWidget {
               ),
             ),
             backgroundColor: kPrimaryColor,
-            body: Padding(
-              padding: const EdgeInsets.only(top: 0, bottom: 0),
-              child: Column(
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: LeaderBoardContainer(
-                              color: const Color(0xFFC0C0C0),
-                              size: 12,
-                              rank: 2,
-                              score: users[1].score,
-                              image: "assets/icons/knight.png",
-                              name: users[1].userName,
-                              bottom: 20,
-                              width: 50,
-                              height: 50,
-                            ),
+            body: LayoutBuilder(
+              builder: (context, constraints) {
+                // Determine the layout based on the screen width
+                bool isWideScreen = constraints.maxWidth > 600;
+
+                return Padding(
+                  padding: const EdgeInsets.only(top: 0, bottom: 0),
+                  child: Column(
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: isWideScreen
+                              ? const EdgeInsets.symmetric(horizontal: 40)
+                              : const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: LeaderBoardContainer(
+                                  color: const Color(0xFFC0C0C0),
+                                  size: isWideScreen ? 15 : 12,
+                                  rank: 2,
+                                  score: users[1].score,
+                                  image: "assets/icons/knight.png",
+                                  name: users[1].userName,
+                                  bottom: isWideScreen ? 30 : 20,
+                                  width: isWideScreen ? 60 : 50,
+                                  height: isWideScreen ? 60 : 50,
+                                ),
+                              ),
+                              Expanded(
+                                child: LeaderBoardContainer(
+                                  color: const Color(0xFFFFD700),
+                                  size: isWideScreen ? 20 : 14,
+                                  rank: 1,
+                                  score: users[0].score,
+                                  width: isWideScreen ? 90 : 70,
+                                  height: isWideScreen ? 90 : 70,
+                                  bottom: isWideScreen ? 60 : 50,
+                                  image: "assets/icons/kingavatar.png",
+                                  name: users[0].userName,
+                                ),
+                              ),
+                              Expanded(
+                                child: LeaderBoardContainer(
+                                  color: const Color(0xFFCD7F32),
+                                  size: isWideScreen ? 15 : 12,
+                                  width: isWideScreen ? 60 : 50,
+                                  height: isWideScreen ? 60 : 50,
+                                  rank: 3,
+                                  score: users[2].score,
+                                  bottom: isWideScreen ? 30 : 20,
+                                  image: "assets/icons/jester.png",
+                                  name: users[2].userName,
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: LeaderBoardContainer(
-                              color: const Color(0xFFFFD700),
-                              size: 14,
-                              rank: 1,
-                              score: users[0].score,
-                              width: 70,
-                              height: 70,
-                              bottom: 50,
-                              image: "assets/icons/kingavatar.png",
-                              name: users[0].userName,
-                            ),
-                          ),
-                          Expanded(
-                            child: LeaderBoardContainer(
-                              color: const Color(0xFFCD7F32),
-                              size: 12,
-                              width: 50,
-                              height: 50,
-                              rank: 3,
-                              score: users[2].score,
-                              bottom: 20,
-                              image: "assets/icons/jester.png",
-                              name: users[2].userName,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: Container(
+                          padding: isWideScreen
+                              ? const EdgeInsets.symmetric(horizontal: 10, vertical: 20)
+                              : const EdgeInsets.symmetric(horizontal: 3, vertical: 20),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
+                          ),
+                          child: ListView.builder(
+                            itemCount: users.length - 3,
+                            itemBuilder: (context, index) => ListTile(
+                              trailing: Material(
+                                elevation: 3, // Adjust the elevation as needed
+                                borderRadius: BorderRadius.circular(20), // Matches the container's borderRadius
+                                color: Colors.transparent, // Needed to make the shadow visible
+                                child: Container(
+                                  width: isWideScreen ? 80 : 60,
+                                  height: isWideScreen ? 35 : 26,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: const Color(0xff66b2b2),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${users[index + 3].score}",
+                                      style: TextStyle(
+                                        fontSize: isWideScreen ? 20 : 15,
+                                        fontFamily: "Montserrat",
+                                        color: Color(0xff2B262D),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              leading: Material(
+                                elevation: 3, // Adjust the elevation as needed
+                                shape: const CircleBorder(),
+                                color: Colors.transparent, // Needed to make the shadow visible
+                                child: Container(
+                                  width: isWideScreen ? 40 : 32,
+                                  height: isWideScreen ? 40 : 32,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xff66b2b2),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${index + 4}",
+                                      style: TextStyle(
+                                        fontSize: isWideScreen ? 22 : 17,
+                                        fontFamily: "Montserrat",
+                                        color: Color(0xff2B262D),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              title: Text(
+                                users[index + 3].userName,
+                                style: TextStyle(
+                                    fontSize: isWideScreen ? 22 : 18,
+                                    fontFamily: "Montserrat",
+                                    color: Color(0xff2B262D)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 3,
-                        vertical: 20,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40),
-                        ),
-                      ),
-                      child: ListView.builder(
-                        itemCount: users.length - 3,
-                        itemBuilder: (context, index) => ListTile(
-                          trailing: Material(
-                            elevation: 3, // Adjust the elevation as needed
-                            borderRadius: BorderRadius.circular(20), // Matches the container's borderRadius
-                            color: Colors.transparent, // Needed to make the shadow visible
-                            child: Container(
-                              width: 60,
-                              height: 26,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xff66b2b2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${users[index + 3].score}",
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: "Montserrat",
-                                    color: Color(0xff2B262D),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          leading: Material(
-                            elevation: 3, // Adjust the elevation as needed
-                            shape: const CircleBorder(),
-                            color: Colors.transparent, // Needed to make the shadow visible
-                            child: Container(
-                              width: 32,
-                              height: 32,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xff66b2b2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${index + 4}",
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontFamily: "Montserrat",
-                                    color: Color(0xff2B262D),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          title: Text(
-                            users[index + 3].userName,
-                            style: const TextStyle(
-                                fontSize: 18,
-                                fontFamily: "Monserrat",
-                                color: Color(0xff2B262D)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                );
+              },
             ),
           );
         } else {
@@ -239,8 +247,8 @@ class LeaderBoardContainer extends StatelessWidget {
             ),
             child: Image.asset(
               image,
-              width: 70,
-              height: 70,
+              width: width,
+              height: height,
             ),
           ),
         ),
@@ -251,7 +259,7 @@ class LeaderBoardContainer extends StatelessWidget {
             topRight: Radius.circular(20),
           ),
           child: Container(
-            width: 70,
+            width: width,
             padding: EdgeInsets.only(bottom: bottom),
             decoration: const BoxDecoration(
               color: Color(0xff66b2b2),

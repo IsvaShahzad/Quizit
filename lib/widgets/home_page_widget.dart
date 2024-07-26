@@ -241,7 +241,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
               ),
               const SizedBox(height: 10),
-              CustomSearchBar(email: widget.email!),
+              // CustomSearchBar(email: widget.email!),
               const SizedBox(height: 10),
               Expanded(
                 child: Padding(

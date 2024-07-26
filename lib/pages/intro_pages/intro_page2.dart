@@ -12,11 +12,15 @@ class IntroPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return OnBoardingWidget(
         controller: controller,
         image: "assets/images/intro2.png",
         description:
-            "Engage in educational quizzes crafted to bring fun and excitement to learning."
+            "Engage in educational quizzes crafted to bring fun and excitement to learning.",
+      imageHeight: screenSize.height * 0.4,  // Adjust image height relative to screen size
+      imageWidth: screenSize.width * 0.8,
     );
   }
 }

@@ -229,7 +229,7 @@ class ResultPage extends StatelessWidget {
                       ),
                     );
                   },
-                  height: 50,
+                  height: 51,
                   minWidth: double.infinity,
                   color: kPrimaryColor,
                   child: const Text(
