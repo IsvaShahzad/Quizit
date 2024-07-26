@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/models/question.dart';
-import 'package:quiz_app/pages/home_page.dart';
-import 'package:quiz_app/pages/results_page.dart';
+
 import 'package:quiz_app/widgets/boolean_response_widget.dart';
 import 'package:quiz_app/widgets/countDownTimed.dart';
 import 'package:quiz_app/widgets/multiple_response_widget.dart';
 import 'package:quiz_app/widgets/question_indicator.dart';
 import 'package:quiz_app/widgets/soundWidget.dart';
+
+import '../screens/home_page.dart';
+import '../screens/results_page.dart';
 
 class QuestionUi extends StatefulWidget {
   const QuestionUi({

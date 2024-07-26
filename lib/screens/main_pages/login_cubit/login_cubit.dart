@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:quiz_app/pages/firebase_services.dart/auth.dart';
+
+import '../../firebase_services.dart/auth.dart';
 
 part 'login_state.dart';
 

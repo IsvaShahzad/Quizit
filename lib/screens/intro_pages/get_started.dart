@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/login_page.dart';
-import 'package:quiz_app/pages/sign_up_page.dart';
+
+import '../login_page.dart';
+import '../sign_up_page.dart';
+
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});

@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/models/user.dart';
-import 'package:quiz_app/pages/home_page.dart';
 import 'package:quiz_app/widgets/loading_widget.dart';
+
+import 'home_page.dart';
 
 class LeaderBoardPage extends StatelessWidget {
   LeaderBoardPage({super.key, required this.email});

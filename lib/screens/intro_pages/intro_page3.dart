@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/intro_pages/get_started.dart';
+
+import 'get_started.dart';
+
 
 class IntroPage3 extends StatelessWidget {
   const IntroPage3({

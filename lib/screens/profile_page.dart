@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/home_page.dart';
-import 'package:quiz_app/pages/profile_tabs/first_tab.dart';
-import 'package:quiz_app/pages/profile_tabs/secound_tab.dart';
-import 'package:quiz_app/pages/profile_tabs/third_tab.dart';
+import 'package:quiz_app/screens/profile_tabs/first_tab.dart';
+import 'package:quiz_app/screens/profile_tabs/secound_tab.dart';
+import 'package:quiz_app/screens/profile_tabs/third_tab.dart';
+
+import '../constants.dart';
+import 'home_page.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({

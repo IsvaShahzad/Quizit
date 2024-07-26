@@ -2,11 +2,13 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/home_page.dart';
-import 'package:quiz_app/pages/question_page.dart';
+import 'package:quiz_app/screens/question_page.dart';
+
 import 'package:quiz_app/widgets/difficulty_container.dart';
 import 'package:quiz_app/widgets/number_container.dart';
 import 'package:quiz_app/widgets/typeContainer.dart';
+
+import 'home_page.dart';
 
 class CatSettingsPage extends StatefulWidget {
   const CatSettingsPage({

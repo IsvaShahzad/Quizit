@@ -3,16 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/question_setting.dart';
-import 'package:quiz_app/pages/details_page.dart';
-import 'package:quiz_app/pages/leader_board_page.dart';
-import 'package:quiz_app/pages/login_page.dart';
-import 'package:quiz_app/pages/profile_page.dart';
-import 'package:quiz_app/pages/homePage_tabs/first_tab.dart';
-import 'package:quiz_app/pages/homePage_tabs/secound_tab.dart';
-import 'package:quiz_app/pages/homePage_tabs/third_tab.dart';
+
 import 'package:quiz_app/widgets/custom_searchbar.dart';
 import 'package:quiz_app/widgets/drawer_list_tile.dart';
+
+import '../screens/details_page.dart';
+import '../screens/homePage_tabs/first_tab.dart';
+import '../screens/homePage_tabs/secound_tab.dart';
+import '../screens/homePage_tabs/third_tab.dart';
+import '../screens/leader_board_page.dart';
+import '../screens/login_page.dart';
+import '../screens/profile_page.dart';
+import '../screens/question_setting.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:quiz_app/pages/onBoarding_page.dart';
+
+import 'onBoarding_page.dart';
 
 class SplashSreen extends StatefulWidget {
   const SplashSreen({Key? key}) : super(key: key);

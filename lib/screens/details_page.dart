@@ -1,7 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/home_page.dart';
+
+import 'home_page.dart';
 
 class AddPage extends StatelessWidget {
   AddPage({super.key, required this.email});
@@ -184,7 +185,7 @@ class AddPage extends StatelessWidget {
                             width: double.infinity,
                             height: screenHeight * 0.07,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(6),
                               gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff008080),

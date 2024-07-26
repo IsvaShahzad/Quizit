@@ -1,5 +1,6 @@
-import 'package:quiz_app/helper/api.dart';
 import 'package:quiz_app/models/question.dart';
+
+import '../api_helper/api.dart';
 
 class GetQuestionsService {
   Future<List<Question>> getQuestions({

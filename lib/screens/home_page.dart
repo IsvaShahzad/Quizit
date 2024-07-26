@@ -1,9 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/pages/firebase_services.dart/firestore.dart';
 import 'package:quiz_app/widgets/home_page_widget.dart';
 import 'package:quiz_app/widgets/loading_widget.dart';
+
+import 'firebase_services.dart/firestore.dart';
 
 class HomePage extends StatelessWidget {
   static String id = "/home_page";

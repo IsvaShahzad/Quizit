@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/helper/show_toast.dart';
-import 'package:quiz_app/pages/cubits/signup_cubit/signup_cubit.dart';
-import 'package:quiz_app/pages/home_page.dart';
+
 import 'package:quiz_app/widgets/ArrowButton.dart';
 import 'package:quiz_app/widgets/signUptextfield_widget.dart';
+
+import '../api_helper/show_toast.dart';
+import 'home_page.dart';
+import 'main_pages/signup_cubit/signup_cubit.dart';
 
 class SignUpPage extends StatelessWidget {
   static String id = "/signUpPage";

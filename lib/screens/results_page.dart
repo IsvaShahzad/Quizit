@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/models/question.dart';
-import 'package:quiz_app/pages/firebase_services.dart/firestore.dart';
-import 'package:quiz_app/pages/home_page.dart';
-import 'package:quiz_app/pages/question_page.dart';
+import 'package:quiz_app/screens/question_page.dart';
+
 import 'package:quiz_app/widgets/analysesWidger.dart';
 import 'package:quiz_app/widgets/score_widget.dart';
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 
 import '../widgets/correction_widget.dart';
+import 'firebase_services.dart/firestore.dart';
+import 'home_page.dart';
 
 class ResultPage extends StatelessWidget {
   ResultPage({

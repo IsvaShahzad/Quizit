@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/pages/cubits/login_cubit/login_cubit.dart';
-import 'package:quiz_app/pages/cubits/signup_cubit/signup_cubit.dart';
-import 'package:quiz_app/pages/home_page.dart';
-import 'package:quiz_app/pages/intro_pages/get_started.dart';
-import 'package:quiz_app/pages/login_page.dart';
-import 'package:quiz_app/pages/onBoarding_page.dart';
-import 'package:quiz_app/pages/sign_up_page.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:quiz_app/pages/splashScreen.dart';
+import 'package:quiz_app/screens/home_page.dart';
+import 'package:quiz_app/screens/intro_pages/get_started.dart';
+import 'package:quiz_app/screens/login_page.dart';
+import 'package:quiz_app/screens/main_pages/login_cubit/login_cubit.dart';
+import 'package:quiz_app/screens/main_pages/signup_cubit/signup_cubit.dart';
+import 'package:quiz_app/screens/onBoarding_page.dart';
+import 'package:quiz_app/screens/sign_up_page.dart';
+import 'package:quiz_app/screens/splashScreen.dart';
 import 'firebase_options.dart';
 
 void main() async {
