@@ -1,4 +1,4 @@
-QuizIt is a quiz application that uses Integrated API of OTDB (Open Trivia Database) used that contains dataset of different topics (19,000+ unique questions data). It has the following features and screens. 
+QuizIt is a quiz application that uses Integrated API of OTDB (Open Trivia Database) used that contains dataset of different topics (19,000+ unique questions data). It has the following features and screens. It has firebase integrated.
 
 *Splash Screens and Login/Sign Up pages*
 
