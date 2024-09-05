@@ -46,7 +46,7 @@ QuizIt is a quiz application that uses Integrated API of OTDB (Open Trivia Datab
 
 ![WhatsApp Image 2024-09-05 at 3 45 05 PM](https://github.com/user-attachments/assets/7cfb8903-c249-433c-a679-7a090d8b54f3)
 
-  ![WhatsApp Image 2024-09-05 at 3 45 05 PM (1)](https://github.com/user-attachments/assets/20687b6d-10c9-4e1f-95d6-96b9bc5d658d)
+![WhatsApp Image 2024-09-05 at 3 45 05 PM (1)](https://github.com/user-attachments/assets/20687b6d-10c9-4e1f-95d6-96b9bc5d658d)
 
 
 
