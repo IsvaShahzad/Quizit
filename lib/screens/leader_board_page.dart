@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
 import 'package:quiz_app/models/user.dart';
 import 'package:quiz_app/widgets/loading_widget.dart';
-
 import 'home_page.dart';
 
 class LeaderBoardPage extends StatelessWidget {
-  LeaderBoardPage({super.key, required this.email});
   final String email;
+  LeaderBoardPage({super.key, required this.email});
 
   static String id = "/LeaderBoardPage";
 
@@ -22,282 +21,294 @@ class LeaderBoardPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            body: const LoadingWidget(
-              color: Colors.white,
-            ),
             backgroundColor: kPrimaryColor,
+            body: const LoadingWidget(color: Colors.white),
           );
-        } else if (snapshot.hasData) {
-          List<User> users = [];
-          List docIds = snapshot.data!.docs;
-          for (int i = 0; i < docIds.length; i++) {
-            users.add(User.fromjson(docIds[i].data()));
-          }
+        }
+
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              leading: Row(
+            backgroundColor: kPrimaryColor,
+            body: const Center(
+              child: Text(
+                "No players yet!",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+          );
+        }
+
+        // Convert docs to User model
+        List<User> users =
+        snapshot.data!.docs.map((e) => User.fromjson(e.data())).toList();
+
+        return Scaffold(
+          backgroundColor: kPrimaryColor,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.popAndPushNamed(context, HomePage.id,
+                    arguments: email);
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+            ),
+          ),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              bool isWide = constraints.maxWidth > 600;
+
+              return Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  const SizedBox(
-                    width: 5,
+                  // 🔹 Podium Row
+                  Positioned(
+                    top: isWide ? -50 : -40, // adjust this to give space from top
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        if (users.length > 1)
+                          PodiumCard(
+                            user: users[1],
+                            rank: 2,
+                            size: isWide ? 80 : 65,
+                            height: isWide ? 190 : 150,
+                          ),
+                        if (users.isNotEmpty)
+                          PodiumCard(
+                            user: users[0],
+                            rank: 1,
+                            size: isWide ? 100 : 85,
+                            height: isWide ? 230 : 180,
+                            crown: true,
+                          ),
+                        if (users.length > 2)
+                          PodiumCard(
+                            user: users[2],
+                            rank: 3,
+                            size: isWide ? 80 : 65,
+                            height: isWide ? 170 : 140,
+                          ),
+                      ],
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, HomePage.id,
-                          arguments: email);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.white,
+
+                  // 🔹 Leaderboard List Container
+// 🔹 Leaderboard List Container
+                  Positioned(
+                    top: isWide ? 10 : 310, // slightly overlaps podium
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: ListView.builder(
+                        itemCount: users.length > 3 ? users.length - 3 : 0,
+                        itemBuilder: (context, index) {
+                          final user = users[index + 3];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: const Color(0xfff5fafa),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 1,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                // 🔹 Rank circle with outline
+                                Container(
+                                  width: isWide ? 46 : 40,
+                                  height: isWide ? 46 : 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: const Color(0xff66b2b2),
+                                    border: Border.all(
+                                      color: Colors.teal, // outline color
+                                      width: 0.8,
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "${index + 4}",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: isWide ? 18 : 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                // 🔹 Name
+                                Expanded(
+                                  child: Text(
+                                    user.userName,
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: isWide ? 18 : 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff2B262D),
+                                    ),
+                                  ),
+                                ),
+
+                                // 🔹 Score
+                                Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff66b2b2),
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: Colors.teal, // outline color
+                                      width: 0.8,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "${user.score} pts",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: isWide ? 16 : 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-            backgroundColor: kPrimaryColor,
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                // Determine the layout based on the screen width
-                bool isWideScreen = constraints.maxWidth > 600;
-
-                return Padding(
-                  padding: const EdgeInsets.only(top: 0, bottom: 0),
-                  child: Column(
-                    children: [
-                      Flexible(
-                        child: Padding(
-                          padding: isWideScreen
-                              ? const EdgeInsets.symmetric(horizontal: 40)
-                              : const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: LeaderBoardContainer(
-                                  color: const Color(0xFFC0C0C0),
-                                  size: isWideScreen ? 15 : 12,
-                                  rank: 2,
-                                  score: users[1].score,
-                                  image: "assets/icons/knight.png",
-                                  name: users[1].userName,
-                                  bottom: isWideScreen ? 30 : 20,
-                                  width: isWideScreen ? 60 : 50,
-                                  height: isWideScreen ? 60 : 50,
-                                ),
-                              ),
-                              Expanded(
-                                child: LeaderBoardContainer(
-                                  color: const Color(0xFFFFD700),
-                                  size: isWideScreen ? 20 : 14,
-                                  rank: 1,
-                                  score: users[0].score,
-                                  width: isWideScreen ? 90 : 70,
-                                  height: isWideScreen ? 90 : 70,
-                                  bottom: isWideScreen ? 60 : 50,
-                                  image: "assets/icons/kingavatar.png",
-                                  name: users[0].userName,
-                                ),
-                              ),
-                              Expanded(
-                                child: LeaderBoardContainer(
-                                  color: const Color(0xFFCD7F32),
-                                  size: isWideScreen ? 15 : 12,
-                                  width: isWideScreen ? 60 : 50,
-                                  height: isWideScreen ? 60 : 50,
-                                  rank: 3,
-                                  score: users[2].score,
-                                  bottom: isWideScreen ? 30 : 20,
-                                  image: "assets/icons/jester.png",
-                                  name: users[2].userName,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: isWideScreen
-                              ? const EdgeInsets.symmetric(horizontal: 10, vertical: 20)
-                              : const EdgeInsets.symmetric(horizontal: 3, vertical: 20),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              topRight: Radius.circular(40),
-                            ),
-                          ),
-                          child: ListView.builder(
-                            itemCount: users.length - 3,
-                            itemBuilder: (context, index) => ListTile(
-                              trailing: Material(
-                                elevation: 3, // Adjust the elevation as needed
-                                borderRadius: BorderRadius.circular(20), // Matches the container's borderRadius
-                                color: Colors.transparent, // Needed to make the shadow visible
-                                child: Container(
-                                  width: isWideScreen ? 80 : 60,
-                                  height: isWideScreen ? 35 : 26,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xff66b2b2),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "${users[index + 3].score}",
-                                      style: TextStyle(
-                                        fontSize: isWideScreen ? 20 : 15,
-                                        fontFamily: "Montserrat",
-                                        color: Color(0xff2B262D),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              leading: Material(
-                                elevation: 3, // Adjust the elevation as needed
-                                shape: const CircleBorder(),
-                                color: Colors.transparent, // Needed to make the shadow visible
-                                child: Container(
-                                  width: isWideScreen ? 40 : 32,
-                                  height: isWideScreen ? 40 : 32,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xff66b2b2),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "${index + 4}",
-                                      style: TextStyle(
-                                        fontSize: isWideScreen ? 22 : 17,
-                                        fontFamily: "Montserrat",
-                                        color: Color(0xff2B262D),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              title: Text(
-                                users[index + 3].userName,
-                                style: TextStyle(
-                                    fontSize: isWideScreen ? 22 : 18,
-                                    fontFamily: "Montserrat",
-                                    color: Color(0xff2B262D)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          );
-        } else {
-          return Text(snapshot.error.toString());
-        }
+              );
+            },
+          ),
+        );
       },
     );
   }
 }
 
-class LeaderBoardContainer extends StatelessWidget {
-  const LeaderBoardContainer({
+// 🔥 Podium Card Widget
+class PodiumCard extends StatelessWidget {
+  final User user;
+  final int rank;
+  final double size;
+  final double height;
+  final bool crown;
+
+  const PodiumCard({
     super.key,
-    required this.image,
-    required this.name,
+    required this.user,
     required this.rank,
-    required this.score,
     required this.size,
-    required this.color,
-    required this.bottom,
-    required this.width,
     required this.height,
+    this.crown = false,
   });
-  final String name, image;
-  final int rank, score;
-  final double size, bottom, width, height;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
+    String avatarPath;
+    if (rank == 1) {
+      avatarPath = "assets/icons/first.png";
+    } else if (rank == 2) {
+      avatarPath = "assets/icons/second.png";
+    } else if (rank == 3) {
+      avatarPath = "assets/icons/third.png";
+    } else {
+      avatarPath = "assets/images/man1.png";
+    }
+
     return Column(
       children: [
+        if (crown)
+          const Icon(Icons.emoji_events,
+              color: Colors.amber, size: 40), // Crown for 1st
+
+        CircleAvatar(
+          radius: size / 2,
+          backgroundColor: const Color(0xff66b2b2),
+          backgroundImage: AssetImage(avatarPath),
+        ),
+        const SizedBox(height: 6),
         Text(
-          name,
+          user.userName,
           style: TextStyle(
-            color: Colors.white,
-            fontFamily: kFontText,
-            fontSize: size,
+            fontFamily: "Montserrat",
             fontWeight: FontWeight.w600,
+            fontSize: size * 0.25,
+            color: Colors.white,
           ),
         ),
-        Material(
-          elevation: 3, // Adjust the elevation to get the desired shadow
-          shape: const CircleBorder(),
-          color: Colors.transparent, // Makes sure the shadow is visible
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 10, top: 5),
-            padding: const EdgeInsetsDirectional.all(10),
-            decoration: BoxDecoration(
-              color: const Color(0xffE4D9F8),
-              shape: BoxShape.circle,
-              border: Border.all(color: color, width: 3),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          height: height,
+          width: size * 1.3,
+          decoration: BoxDecoration(
+            gradient: rank == 1
+                ? const LinearGradient(
+              colors: [
+                Color(0xFF5eead4),
+                Color(0xFF14b8a6),
+                Color(0xFF0f766e),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            )
+                : const LinearGradient(
+              colors: [
+                Color(0xff66b2b2),
+                Color(0xff4e9999),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
-            child: Image.asset(
-              image,
-              width: width,
-              height: height,
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2, // reduced blur
+                offset: Offset(0, 1), // smaller offset
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "$rank",
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "${user.score} pts",
+                style: const TextStyle(fontSize: 14, color: Colors.white),
+              ),
+            ],
           ),
         ),
-        Material(
-          elevation: 4, // Adjust the elevation value to get the desired shadow
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          child: Container(
-            width: width,
-            padding: EdgeInsets.only(bottom: bottom),
-            decoration: const BoxDecoration(
-              color: Color(0xff66b2b2),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "$rank",
-                    style: const TextStyle(
-                      fontSize: 65,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "DM Sans",
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    "${score}pts",
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: kFontText,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        )
       ],
     );
   }

@@ -65,6 +65,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: Scaffold(
         backgroundColor: Color(0xFF008080),
         drawer: Drawer(
+          backgroundColor: Colors.white,
           child: ListView(
             children: [
               DrawerHeader(
@@ -72,29 +73,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   color: Color(0xFF008080),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "assets/images/man.png",
-                      width: 74,
-                      height: 74,
+                      "assets/images/man1.png",
+                      width: 80,
+                      height: 80,
                     ),
                     const SizedBox(height: 5),
                     Text(
                       widget.username!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
-                        fontFamily: kFontText,
+                        fontFamily: 'Montserrat',
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       " ${widget.score} points",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12.7,
                         fontWeight: FontWeight.w300,
-                        fontFamily: kFontText,
+                        fontFamily: "Montserrat",
                         color: Colors.white,
                       ),
                     ),
@@ -102,17 +103,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
               ),
               const SizedBox(height: 45),
-              DrawerListTile(
-                onTap: () {
 
-                },
+              // 🔹 Styled Drawer Tiles
+              _buildStyledDrawerTile(
+                context,
                 icon: Icons.home,
                 title: "Home",
-
-
+                onTap: () {},
               ),
-              const SizedBox(height: 15),
-              DrawerListTile(
+              _buildStyledDrawerTile(
+                context,
+                icon: Icons.map_outlined,
+                title: "Walkthrough",
                 onTap: () {
                   Navigator.of(context).push(
                     PageTransition(
@@ -123,11 +125,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   );
                 },
-                icon: Icons.help_outline,
-                title: "Quiz Guide",
               ),
-              const SizedBox(height: 15),
-              DrawerListTile(
+              _buildStyledDrawerTile(
+                context,
+                icon: Icons.person_outline,
+                title: "Account",
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -142,11 +144,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   );
                 },
-                icon: Icons.person_outline,
-                title: "Account",
               ),
-              const SizedBox(height: 15),
-              DrawerListTile(
+              _buildStyledDrawerTile(
+                context,
+                icon: Icons.emoji_events_outlined,
+                title: "Ranking Board",
                 onTap: () {
                   Navigator.push(
                     context,
@@ -157,21 +159,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   );
                 },
-                icon: Icons.emoji_events_outlined,
-                title: "Leaderboard",
               ),
-              const SizedBox(height: 15),
-              DrawerListTile(
+              _buildStyledDrawerTile(
+                context,
+                icon: Icons.login_outlined,
+                title: "Logout",
                 onTap: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.popAndPushNamed(context, LogInPage.id);
                 },
-                icon: Icons.logout,
-                title: "Logout",
               ),
             ],
           ),
         ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           clipBehavior: Clip.none,
@@ -192,6 +193,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   );
                 },
               ),
+
             ],
           ),
           actions: [
@@ -353,4 +355,59 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
     );
   }
+}
+Widget _buildStyledDrawerTile(
+    BuildContext context, {
+      required IconData icon,
+      required String title,
+      required VoidCallback onTap,
+    }) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
+  // Scale values relative to screen size
+  double horizontalMargin = screenWidth * 0.02;
+  double verticalMargin = screenHeight * 0.008;
+  double fontSize = screenWidth * 0.04;
+  double iconSize = screenWidth * 0.06;
+
+  return Container(
+    margin: EdgeInsets.symmetric(
+      horizontal: horizontalMargin,
+      vertical: verticalMargin,
+    ),
+    decoration: BoxDecoration(
+      color: Colors.grey[100],
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(
+        color: Colors.grey.shade300,
+        width: 0.5,
+      ),
+    ),
+    child: ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      leading: Icon(
+        icon,
+        color: Colors.teal,
+        size: iconSize,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: fontSize,
+          fontWeight: FontWeight.w500,
+          color: Colors.black87,
+        ),
+      ),
+      trailing: Icon(
+        Icons.chevron_right,
+        color: Colors.grey,
+        size: iconSize * 0.8,
+      ),
+      onTap: onTap,
+    ),
+  );
 }

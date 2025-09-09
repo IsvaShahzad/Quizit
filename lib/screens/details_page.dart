@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
-
 import 'home_page.dart';
 
 class AddPage extends StatelessWidget {
@@ -16,212 +15,146 @@ class AddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double appBarHeight = kToolbarHeight; // Default app bar height
+    final size = MediaQuery.of(context).size;
 
     return WillPopScope(
-      onWillPop: () async => false, // Disable back navigation
+      onWillPop: () async => false,
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                kPrimaryColor,
-                const Color(0xFF006666),
-              ],
+              colors: [Color(0xff006666), Color(0xff00b3b3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
-            children: [
-              Container(
-                height: appBarHeight,
-                child: AppBar(
-                  automaticallyImplyLeading: false,
-                  clipBehavior: Clip.none,
-                  backgroundColor: Colors.transparent,
-                  actions: [
-                    Image.asset("assets/images/man.png"),
-                    SizedBox(width: screenWidth * 0.04),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.20, // Adjust spacing from top
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadiusDirectional.circular(30),
+          child: SafeArea(
+            child: Column(
+              children: [
+                // 🔹 Hero Header
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/icons/quiz.png",
+                        width: size.width * 0.35,
+                        height: size.width * 0.35,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Ready to play?",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: size.width * 0.07,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "Test your knowledge in a fun way",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: size.width * 0.04,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.04,
-                      vertical: screenHeight * 0.02,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: screenHeight * 0.02,
-                              bottom: screenHeight * 0.02,
-                            ),
-                            width: screenWidth * 0.2,
-                            height: 4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(
-                                colors: [
-                                  kPrimaryColor,
-                                  const Color(0xFF006666),
-                                ],
-                              ),
-                            ),
-                          ),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+
+                // 🔹 Glassmorphism Card
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.all(25),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Info Row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          _InfoPill(icon: Icons.article_outlined, label: "1 Qs"),
+                          _InfoPill(icon: Icons.timer, label: "30s"),
+                          _InfoPill(icon: Icons.star_border, label: "10 pts"),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Rules
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          _RuleText("10 points for correct answers."),
+                          _RuleText("30 seconds for each question."),
+                          _RuleText("Tap to select an option."),
+                          _RuleText("Press Next to move ahead."),
+                          _RuleText("Submit when all done."),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: size.height * 0.06,
+                ),
+                // 🔹 Start Button
+                GestureDetector(
+                  onTap: () {
+                    playSound();
+                    Navigator.popAndPushNamed(
+                      context,
+                      HomePage.id,
+                      arguments: email,
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 40),
+                    height: size.height * 0.07,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xff00b3b3), Color(0xff004c4c)],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 3,
+                          offset: Offset(0, 2),
                         ),
-                        Text(
-                          "Quiz details",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "Montserrat",
-                            fontSize: screenWidth * 0.06,
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Container(
-                          width: double.infinity,
-                          height: screenHeight * 0.08,
-                          decoration: BoxDecoration(
-                            color: kSecondaryColor.withOpacity(0.36),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.02),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomDetailedContainer(
-                                  icon: Icons.article_outlined,
-                                ),
-                                CustomDetailedText(
-                                  text: "1 Question",
-                                ),
-                                CustomDetailedContainer(
-                                  icon: Icons.access_alarm,
-                                ),
-                                CustomDetailedText(
-                                  text: "30 seconds",
-                                ),
-                                CustomDetailedContainer(
-                                  icon: Icons.star_outline,
-                                ),
-                                CustomDetailedText(
-                                  text: "10 Points",
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Brief explanation about quiz",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "Montserrat",
-                            fontSize: screenWidth * 0.05,
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.00),
-                        Expanded(
-                          child: ListView(
-                            children: const [
-                              CustomListTile(
-                                title:
-                                    "10 points awarded for a correct answer and no points for an incorrect answer",
-                              ),
-                              CustomListTile(
-                                title:
-                                    "30 seconds allotted to answer one question.",
-                              ),
-                              CustomListTile(
-                                title:
-                                    "Tap on options to select the correct answer",
-                              ),
-                              CustomListTile(
-                                title:
-                                    "Tap on the button Next to move to the next question",
-                              ),
-                              CustomListTile(
-                                title:
-                                    "Click submit if you completed all the questions",
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.03),
-                        GestureDetector(
-                          onTap: () {
-                            playSound();
-                            Navigator.popAndPushNamed(
-                              context,
-                              HomePage.id,
-                              arguments: email,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.04,
-                              vertical: screenHeight * 0.02,
-                            ),
-                            width: double.infinity,
-                            height: screenHeight * 0.07,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color(0xff008080),
-                                  Color(0xFF006666),
-                                ],
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Let's Start",
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.04,
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(width: screenWidth * 0.02),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Colors.white,
-                                  size: screenWidth * 0.04,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.03),
                       ],
                     ),
+                    child: Center(
+                      child: Text(
+                        "Start Quiz",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
@@ -229,39 +162,32 @@ class AddPage extends StatelessWidget {
   }
 }
 
-class CustomListTile extends StatelessWidget {
-  const CustomListTile({
-    super.key,
-    required this.title,
-  });
-  final String title;
+class _InfoPill extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const _InfoPill({required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(50),
+      ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: Icon(
-              Icons.circle,
-              size: 11,
-            ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.04,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
+          Icon(icon, size: size.width * 0.05, color: Colors.white),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: size.width * 0.04,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -270,55 +196,29 @@ class CustomListTile extends StatelessWidget {
   }
 }
 
-class CustomDetailedText extends StatelessWidget {
-  const CustomDetailedText({
-    super.key,
-    required this.text,
-  });
+class _RuleText extends StatelessWidget {
   final String text;
+  const _RuleText(this.text);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.04,
-        fontFamily: "Montserrat",
-        fontWeight: FontWeight.w500,
-        color: Colors.black,
-      ),
-    );
-  }
-}
-
-class CustomDetailedContainer extends StatelessWidget {
-  const CustomDetailedContainer({
-    super.key,
-    required this.icon,
-  });
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xff008080),
-            Color(0xff006666),
-          ],
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(7),
-        child: Icon(
-          icon,
-          size: MediaQuery.of(context).size.width * 0.04,
-          color: Colors.white,
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          const Icon(Icons.check_circle, size: 18, color: Colors.white),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
