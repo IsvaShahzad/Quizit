@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "787628066985",
+    "project_id": "quizit-f33d2",
+    "storage_bucket": "quizit-f33d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787628066985:android:09f05c97e4bbd60d6201b8",
+        "android_client_info": {
+          "package_name": "com.example.quiz_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBggnflx7yx7R4mE7PdM9PutCz25noWvFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
