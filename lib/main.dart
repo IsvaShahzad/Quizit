@@ -57,3 +57,35 @@ class Quiz extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:panorama_viewer/panorama_viewer.dart';
+//
+// void main() {
+//   runApp(const MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text("360° View Demo")),
+//         body: const Center(
+//           child: PanoramaViewer(
+//             child: Image(
+//               image: NetworkImage(
+//                 "https://pannellum.org/assets/images/image1.jpg", // sample 360° image
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+
