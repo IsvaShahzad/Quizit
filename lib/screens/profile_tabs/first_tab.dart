@@ -5,7 +5,7 @@ import 'package:quiz_app/data.dart';
 import 'package:quiz_app/widgets/stats_container.dart';
 
 class FirstProfileTab extends StatelessWidget {
-   FirstProfileTab({
+  FirstProfileTab({
     super.key,
     required this.data,
   });
@@ -102,18 +102,20 @@ class FirstProfileTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               StatsContainer(
-                color: const Color(0xffFEA704).withOpacity(0.2),
-                image: "assets/icons/search 1.png",
-                subTitle: "Quizzes",
-                title: "${data["quizTaken"]}",
-              ),
-              StatsContainer(
                 color: const Color(0xffD1AEE5).withOpacity(0.35),
-                image: "assets/icons/bar.png",
+                image: "assets/icons/i4.png",
                 subTitle: "Avg.Score",
                 title: "${averageScore.round()}",
                 size: screenWidth * 0.03, // Adjust text size
               ),
+              StatsContainer(
+                color: const Color(0xff02BC7D).withOpacity(0.15),
+                image: "assets/icons/i2.png",
+                subTitle: "Accuracy",
+                title: "${accuracy.round()}%",
+              ),
+
+
             ],
           ),
           SizedBox(height: screenHeight * 0.02), // Adjust spacing
@@ -121,24 +123,25 @@ class FirstProfileTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               StatsContainer(
-                color: const Color(0xff02BC7D).withOpacity(0.15),
-                image: "assets/icons/checkmark.png",
-                subTitle: "Accuracy",
-                title: "${accuracy.round()}%",
-              ),
-              StatsContainer(
                 color: const Color(0xff4DC3FF).withOpacity(0.15),
-                image: "assets/icons/rise 1.png",
+                image: "assets/icons/i1.png",
                 subTitle: "Progress",
                 title: progress.toStringAsFixed(2) + '%',
               ),
+              StatsContainer(
+                color: const Color(0xffFEA704).withOpacity(0.2),
+                image: "assets/icons/i3.png",
+                subTitle: "Quizzes",
+                title: "${data["quizTaken"]}",
+              ),
+
             ],
           ),
           SizedBox(height: screenHeight * 0.03), // Adjust spacing
           strongestCat.isEmpty
               ? Container()
               : Text(
-            "PERFORMANCEe",
+            "STRONGEST PERFORMANCE",
             style: TextStyle(
               fontSize: screenWidth * 0.04, // Adjust font size
               fontWeight: FontWeight.w600,
@@ -204,7 +207,7 @@ class FirstProfileTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "PERFORMANCE",
+                "WEAKEST PERFORMANCE",
                 style: TextStyle(
                   fontSize: screenWidth * 0.04, // Adjust font size
                   fontWeight: FontWeight.w600,

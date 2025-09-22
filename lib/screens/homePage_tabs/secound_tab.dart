@@ -18,7 +18,7 @@ class _SecoundTabState extends State<SecoundTab> {
   final AudioPlayer player = AudioPlayer();
   Future<void> playSound() async {
     String soundPath =
-        "sounds/456601__bumpelsnake__select10.wav"; //You don't need to include assets/ because AssetSource assume that you have sound in your assets folder.
+        "sounds/456601__bumpelsnake__select10.wav";
     await player.play(AssetSource(soundPath));
   }
 

@@ -9,28 +9,27 @@ class StatsContainer extends StatelessWidget {
     required this.color,
     required this.image,
     this.size = 13,
-    // required this.width,
-    // required this.height,
   });
+
   final String image;
   final String title, subTitle;
   final Color color;
   final double size;
-  // final double width, height;
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
-      clipBehavior: Clip.none,
-      height: MediaQuery.of(context).size.height * 0.085,
-      width: MediaQuery.of(context).size.width * 0.43,
+      height: MediaQuery.of(context).size.height * 0.15,
+      width: screenWidth * 0.43,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: const Color(0xffA6ABBD).withOpacity(0.8),
             spreadRadius: 0,
             blurRadius: 18.5,
-            offset: const Offset(2.5, 2.5), // changes position of shadow
+            offset: const Offset(2.5, 2.5),
           ),
           BoxShadow(
             color: const Color(0xffFAFBFF).withOpacity(0.4),
@@ -39,54 +38,50 @@ class StatsContainer extends StatelessWidget {
           )
         ],
         color: Colors.white,
-        borderRadius: BorderRadius.circular(23),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 21),
-        child: Row(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 31,
-              height: 31,
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: color,
               ),
-              child: Image.asset(
-                image,
-                width: 31,
-                height: 31,
+              child: Center(
+                child: Image.asset(
+                  image,
+                  width: 26,
+                  height: 26,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: kFontText,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    subTitle,
-                    style: TextStyle(
-                      fontSize: size,
-                      fontFamily: kFontText,
-                      color: const Color(0xff999999),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            const SizedBox(height: 8),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: kFontText,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
               ),
-            )
+            ),
+            Text(
+              subTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: size,
+                fontFamily: kFontText,
+                color: const Color(0xff999999),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),

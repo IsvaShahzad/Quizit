@@ -2,107 +2,137 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/constants.dart';
 
 class HistoryContainer extends StatelessWidget {
-  const HistoryContainer(
-      {super.key,
-      required this.gradient,
-      required this.title,
-      required this.subtitle,
-      required this.date,
-      required this.correct,
-      required this.image});
+  const HistoryContainer({
+    super.key,
+    required this.gradient,
+    required this.title,
+    required this.subtitle,
+    required this.date,
+    required this.correct,
+    required this.image,
+    this.onTap,
+  });
 
   final LinearGradient gradient;
   final String title, subtitle, date, correct, image;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 17),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white.withOpacity(0.3),
-            spreadRadius: 0,
-            blurRadius: 19,
-            offset: const Offset(2.68, 2.68), // changes position of shadow
-          ),
-          BoxShadow(
-            color: const Color(0xffFAFBFF).withOpacity(0.4),
-            spreadRadius: 0,
-            blurRadius: 17.16,
-            offset: const Offset(-1.33, -1.33), // changes position of shadow
-          ),
-        ],
-        borderRadius: BorderRadius.circular(23),
-        color: Colors.white,
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            child: Image.asset(
-              image,
-              width: 60,
-              height: 60,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+
+          /// Bring back the glow effect (bright & soft)
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white.withOpacity(0.6), // outer glow (bright white)
+              spreadRadius: 0,
+              blurRadius: 13,
+              offset: const Offset(2, 2),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: "Oldenburg",
-                    color: Color(0xff000000),
-                  ),
-                ),
-                ShaderMask(
-                  blendMode: BlendMode.srcIn,
-                  shaderCallback: (rect) => gradient.createShader(rect),
-                  child: Text(
-                    subtitle,
+            BoxShadow(
+              color: Colors.white.withOpacity(0.4), // inner subtle glow
+              spreadRadius: 0,
+              blurRadius: 15,
+              offset: const Offset(-2, -2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Image (no circular border)
+            Image.asset(
+              image,
+              width: 55,
+              height: 55,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(width: 14),
+
+            // Text Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Title
+                  Text(
+                    title,
                     style: const TextStyle(
-                      fontSize: 15,
-                      fontFamily: "Oldenburg",
+                      fontSize: 14,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 18),
-                  child: Row(
+
+                  // Subtitle with gradient
+                  ShaderMask(
+                    blendMode: BlendMode.srcIn,
+                    shaderCallback: (rect) => gradient.createShader(rect),
+                    child: Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  // Date & Correct info with icons
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        date,
-                        style: TextStyle(
-                          color: const Color(0xff999999),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: kFontText,
-                        ),
+                      Row(
+                        children: [
+                          const Icon(Icons.access_time,
+                              size: 12, color: Color(0xff999999)),
+                          const SizedBox(width: 4),
+                          Text(
+                            date,
+                            style: const TextStyle(
+                              color: Color(0xff999999),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Montserrat',
+                            ),
+                          ),
+                        ],
                       ),
-                      // Adding some space between the texts
-                      Text(
-                        correct,
-                        style: TextStyle(
-                          color: Color(0xff999999),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: kFontText,
-                        ),
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle,
+                              size: 12, color: Color(0xff999999)),
+                          const SizedBox(width: 4),
+                          Text(
+                            correct,
+                            style: const TextStyle(
+                              color: Color(0xff999999),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Montserrat',
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                )
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/widgets/label_widger.dart';
 
 class ThirdProfileTab extends StatefulWidget {
   const ThirdProfileTab({
@@ -21,6 +19,10 @@ class _ThirdProfileTabState extends State<ThirdProfileTab> {
   late TextEditingController emailController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  bool isUsernameEditable = false;
+  bool isEmailEditable = false;
+  bool isPasswordEditable = false;
+
   @override
   void initState() {
     super.initState();
@@ -39,70 +41,190 @@ class _ThirdProfileTabState extends State<ThirdProfileTab> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final cardPadding = screenWidth * 0.05;
+        final borderRadius = screenWidth * 0.0;
+        final iconSize = screenWidth * 0.05;
+        final fontSizeLabel = screenWidth * 0.035;
+        final fontSizeInput = screenWidth * 0.04;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: screenWidth * 0.1, // Adjust vertical padding based on screen width
-        horizontal: screenWidth * 0.05, // Adjust horizontal padding based on screen width
+        return SingleChildScrollView(
+          padding: EdgeInsets.all(screenWidth * 0.06),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                _buildProfileCard(
+                  icon: Icons.person,
+                  label: "Username",
+                  controller: usernameController,
+                  isEditable: isUsernameEditable,
+                  onEditTap: () => _onEditTapForField(
+                    key: 'username',
+                    controller: usernameController,
+                    isEditable: isUsernameEditable,
+                    setEditable: (v) => setState(() => isUsernameEditable = v),
+                  ),
+                  cardPadding: cardPadding,
+                  borderRadius: borderRadius,
+                  iconSize: iconSize,
+                  fontSizeLabel: fontSizeLabel,
+                  fontSizeInput: fontSizeInput,
+                ),
+                SizedBox(height: screenWidth * 0.04),
+                _buildProfileCard(
+                  icon: Icons.email,
+                  label: "Email",
+                  controller: emailController,
+                  isEditable: isEmailEditable,
+                  onEditTap: () => _onEditTapForField(
+                    key: 'email',
+                    controller: emailController,
+                    isEditable: isEmailEditable,
+                    setEditable: (v) => setState(() => isEmailEditable = v),
+                  ),
+                  cardPadding: cardPadding,
+                  borderRadius: borderRadius,
+                  iconSize: iconSize,
+                  fontSizeLabel: fontSizeLabel,
+                  fontSizeInput: fontSizeInput,
+                ),
+                SizedBox(height: screenWidth * 0.04),
+                _buildProfileCard(
+                  icon: Icons.lock,
+                  label: "Password",
+                  controller: passwordController,
+                  obscure: true,
+                  isEditable: isPasswordEditable,
+                  onEditTap: () => _onEditTapForField(
+                    key: 'password',
+                    controller: passwordController,
+                    isEditable: isPasswordEditable,
+                    setEditable: (v) => setState(() => isPasswordEditable = v),
+                  ),
+                  cardPadding: cardPadding,
+                  borderRadius: borderRadius,
+                  iconSize: iconSize,
+                  fontSizeLabel: fontSizeLabel,
+                  fontSizeInput: fontSizeInput,
+                ),
+                SizedBox(height: screenWidth * 0.08),
+
+                // Save Button
+                Center(
+                  child: SizedBox(
+                    width: screenWidth * 0.7,
+                    child: ElevatedButton(
+                      onPressed: () => _updateProfile(context),
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: screenWidth * 0.04),
+                        backgroundColor: Colors.white.withOpacity(0.2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(borderRadius),
+                        ),
+                        elevation: 3,
+                        shadowColor: Colors.black.withOpacity(0.3),
+                      ),
+                      child: Text(
+                        "Save Changes",
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.045,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Montserrat",
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildProfileCard({
+    required String label,
+    required TextEditingController controller,
+    required bool isEditable,
+    required VoidCallback onEditTap,
+    required double cardPadding,
+    required double borderRadius,
+    required double iconSize,
+    required double fontSizeLabel,
+    required double fontSizeInput,
+    bool obscure = false,
+    IconData? icon,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(color: Colors.white.withOpacity(0.3)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 8,
+            offset: const Offset(2, 3),
+          ),
+        ],
       ),
-      child: Form(
-        key: formKey,
-        child: ListView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: cardPadding, vertical: cardPadding * 0.7),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Label(text: "Username"),
-            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
-            ProfileTextField(controller: usernameController),
-            SizedBox(height: screenWidth * 0.05), // Adjust spacing based on screen width
-            const Label(text: "Email"),
-            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
-            ProfileTextField(
-              controller: emailController,
-              enabled: true,
-            ),
-            SizedBox(height: screenWidth * 0.05), // Adjust spacing based on screen width
-            const Label(text: "Password"),
-            SizedBox(height: screenWidth * 0.02), // Adjust spacing based on screen width
-            ProfileTextField(
-              controller: passwordController,
-              obscure: true,
-              enabled: true,
-            ),
-            SizedBox(height: screenWidth * 0.1), // Adjust spacing based on screen width
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.3),
-                    spreadRadius: 0,
-                    blurRadius: 15,
-                    offset: const Offset(5, 4),
-                  ),
-                ],
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  _updateProfile(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: const Color(0xff006666),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            // Top Row (Label + Edit Icon)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    if (icon != null)
+                      Icon(icon, color: Colors.white.withOpacity(0.8), size: iconSize),
+                    if (icon != null) SizedBox(width: cardPadding * 0.4),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: fontSizeLabel,
+                        color: Colors.white70,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: onEditTap,
+                  child: Icon(
+                    isEditable ? Icons.check_circle : Icons.edit,
+                    color: isEditable ? Colors.greenAccent : Colors.white70,
+                    size: iconSize,
                   ),
                 ),
-                child: Text(
-                  "Update",
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.04, // Adjust font size based on screen width
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xff006666),
-                  ),
-                ),
+              ],
+            ),
+            SizedBox(height: cardPadding * 0.5),
+            // Input Field
+            TextFormField(
+              controller: controller,
+              enabled: isEditable,
+              obscureText: obscure,
+              style: TextStyle(color: Colors.white, fontSize: fontSizeInput),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "This field is required";
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
               ),
+              cursorColor: Colors.tealAccent,
             ),
           ],
         ),
@@ -110,105 +232,76 @@ class _ThirdProfileTabState extends State<ThirdProfileTab> {
     );
   }
 
+  void _onEditTapForField({
+    required String key,
+    required TextEditingController controller,
+    required bool isEditable,
+    required void Function(bool) setEditable,
+  }) {
+    if (isEditable) {
+      final value = controller.text.trim();
+      if (value.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Field cannot be empty')),
+        );
+        return;
+      }
+      _saveField(key, value).then((success) {
+        if (success) setEditable(false);
+      });
+    } else {
+      setEditable(true);
+    }
+  }
+
+  Future<bool> _saveField(String key, String value) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(key, value);
+      setState(() {
+        widget.data[key] = value;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('$key saved')),
+      );
+      return true;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save $key: $e')),
+      );
+      return false;
+    }
+  }
+
   Future<void> _updateProfile(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      // Collect updated data
-      final updatedUsername = usernameController.text;
-      final updatedPassword = passwordController.text;
-      final updatedEmail = emailController.text;
+      final updatedUsername = usernameController.text.trim();
+      final updatedPassword = passwordController.text.trim();
+      final updatedEmail = emailController.text.trim();
 
       try {
-        // Save data to SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('username', updatedUsername);
         await prefs.setString('password', updatedPassword);
         await prefs.setString('email', updatedEmail);
 
-        // Show a success message
+        setState(() {
+          widget.data['username'] = updatedUsername;
+          widget.data['password'] = updatedPassword;
+          widget.data['email'] = updatedEmail;
+          isUsernameEditable = false;
+          isEmailEditable = false;
+          isPasswordEditable = false;
+        });
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile updated successfully!')),
         );
       } catch (e) {
-        // Handle any errors
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to update profile: $e')),
         );
       }
     }
-  }
-}
-
-class ProfileTextField extends StatelessWidget {
-  const ProfileTextField({
-    super.key,
-    required this.controller,
-    this.obscure = false,
-    this.enabled = true,
-  });
-
-  final TextEditingController controller;
-  final bool obscure;
-  final bool enabled;
-
-  @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
-
-    return TextFormField(
-      cursorColor: Colors.teal,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Field is required.";
-        }
-        return null;
-      },
-      enabled: enabled,
-      controller: controller,
-      obscureText: obscure,
-      style: TextStyle(
-        fontFamily: kFontText,
-        fontSize: screenWidth * 0.03, // Adjust font size based on screen width
-        color: Colors.white,
-      ),
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.04, // Adjust horizontal padding based on screen width
-          vertical: screenWidth * 0.03, // Adjust vertical padding based on screen width
-        ),
-        suffixIcon: const Icon(
-          Icons.edit,
-          color: Colors.white,
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-          borderSide: const BorderSide(
-            color: Color(0xffA9A9A9),
-            width: 1,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-          borderSide: const BorderSide(
-            color: Color(0xffA9A9A9),
-            width: 1,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-          borderSide: const BorderSide(
-            color: Color(0xffA9A9A9),
-            width: 1,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-          borderSide: const BorderSide(
-            color: Color(0xffA9A9A9),
-            width: 1,
-          ),
-        ),
-      ),
-    );
   }
 }

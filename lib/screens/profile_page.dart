@@ -65,7 +65,7 @@ class ProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/images/man.png",
+                  "assets/images/man1.png",
                   width: 70,
                   height: 70,
                 ),
@@ -73,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                   child: Text(
                     data["username"],
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 23,
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Montserrat',
                       color: Colors.white,

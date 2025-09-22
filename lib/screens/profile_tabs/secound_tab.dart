@@ -38,8 +38,8 @@ class SecoundProfileTab extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: screenHeight * 0.02, // Adjust vertical padding based on screen height
-        horizontal: screenWidth * 0.05, // Adjust horizontal padding based on screen width
+        vertical: screenHeight * 0.03, // Adjust vertical padding based on screen height
+        horizontal: screenWidth * 0.01, // Adjust horizontal padding based on screen width
       ),
       child: ListView.builder(
         clipBehavior: Clip.none,
